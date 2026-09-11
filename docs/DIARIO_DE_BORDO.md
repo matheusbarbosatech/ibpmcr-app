@@ -46,7 +46,8 @@ O **IBPM CR App** nasceu para ser a ponte invisível entre o sofrimento calado d
 - [x] **Módulo 1:** PRD da Fase 1, Decision Log e Edital concluídos e commitados.
 - [x] **Mídia:** 217 cortes renderizados e prontos para curadoria.
 - [x] **Manifesto:** Diário de Bordo registrado.
-- [ ] **Módulo 2 (Próximo):** Construção da interface visual do Refúgio Silencioso em Flet (Python) com paleta acolhedora e botões de sentimento.
+- [x] **Módulo 2:** Construção da interface visual do Refúgio Silencioso em Flet (Python) com paleta acolhedora, 4 abas e botões de sentimento.
+- [ ] **Módulo 3 (Próximo):** O Coração de Dados (Integração Supabase, persistência em tempo real e RLS).
 
 ---
 *"Dê-me seis horas para derrubar uma árvore e passarei as primeiras quatro afiando o machado." — Abraham Lincoln*

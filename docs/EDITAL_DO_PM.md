@@ -29,9 +29,10 @@ Abaixo está o seu **Edital de 4 Módulos**. Cada módulo tem o conteúdo teóri
   - Angela Yu: Funções com parâmetros, Orientação a Objetos simples em Python, Dicionários e Listas.
   - Documentação Oficial do Flet: Navegação com `NavigationBar`, Cards, Botões e Temas.
 * **A Prova Prática (Sua Entrega):**
-  - [ ] Criar a identidade visual do app em Python (Paleta escura/dourada acolhedora).
-  - [ ] Montar a tela estática do **Refúgio Silencioso** com os botões de sentimentos clicáveis.
-  - [ ] Testar no celular via Flet App ou janela do Windows.
+  - [x] Criar a identidade visual do app em Python (Paleta escura/dourada acolhedora).
+  - [x] Montar a tela estática do **Refúgio Silencioso** com os botões de sentimentos clicáveis.
+  - [x] Testar no celular via Flet App ou janela do Windows.
+* **Nota do Simulado:** APROVADO! Fundação visual e navegação 100% construídas e validadas.
 
 ---
 
