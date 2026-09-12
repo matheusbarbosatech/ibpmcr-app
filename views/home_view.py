@@ -268,6 +268,7 @@ class HomeView(ft.Container):
                 padding=AppPadding.symmetric(horizontal=12, vertical=8),
                 border_radius=10,
                 border=AppBorder.all(1, AppColors.PRIMARY_RUBI if is_active else AppColors.BORDER_DEFAULT),
+                ink=True,
                 on_click=lambda e, t=tag: self.filtrar_frase(t),
             )
             chips_controls.append(btn_chip)
@@ -402,6 +403,7 @@ class HomeView(ft.Container):
             border=AppBorder.all(1, AppColors.BORDER_DEFAULT),
             expand=True,
             height=110,  # Área ampla para toque fácil de idosos (>> 48dp)
+            ink=True,
             on_click=on_click_action,
         )
 

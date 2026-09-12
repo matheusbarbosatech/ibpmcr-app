@@ -44,6 +44,7 @@ class FotosView(ft.Container):
             padding=AppPadding.symmetric(horizontal=14, vertical=10),
             border_radius=10,
             border=AppBorder.all(1, AppColors.PRIMARY_RUBI if self.active_subtab == 0 else AppColors.BORDER_DEFAULT),
+            ink=True,
             on_click=lambda e: self.alternar_subtab(0),
         )
 
@@ -59,6 +60,7 @@ class FotosView(ft.Container):
             padding=AppPadding.symmetric(horizontal=14, vertical=10),
             border_radius=10,
             border=AppBorder.all(1, AppColors.PRIMARY_RUBI if self.active_subtab == 1 else AppColors.BORDER_DEFAULT),
+            ink=True,
             on_click=lambda e: self.alternar_subtab(1),
         )
 

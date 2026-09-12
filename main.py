@@ -130,8 +130,14 @@ def main(page: ft.Page):
     )
     page.appbar = app_bar
 
-    # 6. Criação das 4 Telas Principais
-    home_view = HomeView(page)
+    # 6. Criação das 4 Telas Principais com Navegação Conectada
+    def switch_tab(index: int):
+        if 0 <= index < len(views):
+            nav_bar.selected_index = index
+            content_area.content = views[index]
+            page.update()
+
+    home_view = HomeView(page, navigate_to_tab=switch_tab)
     oracao_view = OracaoView(page)
     palavra_view = PalavraView(page)
     fotos_view = FotosView(page)

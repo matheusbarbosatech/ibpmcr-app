@@ -67,6 +67,7 @@ class PalavraView(ft.Container):
                 padding=AppPadding.symmetric(horizontal=12, vertical=10),
                 border_radius=10,
                 border=AppBorder.all(1, AppColors.PRIMARY_RUBI if is_active else AppColors.BORDER_DEFAULT),
+                ink=True,
                 on_click=lambda e, i=idx: self.mudar_sub_aba(i),
             )
             botoes_sub_abas.append(btn)

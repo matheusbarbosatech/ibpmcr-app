@@ -18,18 +18,19 @@ class ShareEngine:
         )
         link = f"https://api.whatsapp.com/send?text={urllib.parse.quote(mensagem)}"
         try:
+            ShareEngine.show_feedback(page, "📲 Abrindo WhatsApp...")
             page.launch_url(link)
         except Exception:
-            pass
+            ShareEngine.show_feedback(page, "⚠️ Não foi possível abrir o WhatsApp.")
 
     @staticmethod
     def share_instagram_stories(page: ft.Page, media_url: str = ""):
         """Abre o Instagram pronto para criar um Story."""
         try:
-            # Tenta disparar protocolo do Instagram ou link direto
-            page.launch_url("instagram://story-camera")
-        except Exception:
+            ShareEngine.show_feedback(page, "📸 Abrindo Instagram...")
             page.launch_url("https://www.instagram.com/ibpmcr7976/")
+        except Exception:
+            ShareEngine.show_feedback(page, "⚠️ Não foi possível abrir o Instagram.")
 
     @staticmethod
     def download_to_device(page: ft.Page, media_url: str, file_name: str = "ibpmcr_arquivo"):
