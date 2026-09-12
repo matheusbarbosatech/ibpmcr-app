@@ -1,9 +1,33 @@
-__pycache__/
-*.pyc
+# Ambientes e Variáveis Secretas (NUNCA SUBIR PARA O GITHUB)
 .env
-.venv/
-venv/
+.env.*
+*.env
+*.pem
+*.key
+
+# Caches e Compilação
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.flet/
 dist/
 build/
-.flet/
+*.egg-info/
+
+# Ambientes Virtuais
+.venv/
+venv/
+ENV/
+
+# Logs e scripts temporários
 *.log
+scratch_*.py
+test_sonnet_raw.py
+*.tmp
+data/r2_cortes_manifest.json
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+desktop.ini

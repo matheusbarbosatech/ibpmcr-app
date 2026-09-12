@@ -26,6 +26,8 @@ class HomeView(ft.Container):
         self.current_frase_obj = None
         self.btn_audio_play = None
         self.audio_status_text = None
+        self.btn_radio_play = None
+        self.radio_status_text = None
 
         FontScaleManager.register_listener(self.on_font_scale_changed)
         self.build_ui()
@@ -179,10 +181,69 @@ class HomeView(ft.Container):
             padding=AppPadding.all(14),
             border_radius=14,
             border=AppBorder.all(1, AppColors.BORDER_DEFAULT),
+            margin=AppMargin.only(bottom=12),
+        )
+
+        # 3. RÁDIO IBPM CR • 24 HORAS NO ALTAR (ESTILO RÁDIO MAANAIM)
+        self.btn_radio_play = ft.IconButton(
+            icon=Icons.RADIO,
+            icon_color="#FFFFFF",
+            bgcolor=AppColors.PRIMARY_RUBI,
+            icon_size=26,
+            tooltip="Ouvir Rádio IBPM CR Ao Vivo",
+            on_click=self.tocar_radio_ibpmcr,
+        )
+        self.radio_status_text = ft.Text(
+            "🔴 NO AR • Louvores & Palavra 24h",
+            size=FontScaleManager.s(12),
+            color=AppColors.SECONDARY_GOLD,
+        )
+
+        card_radio_ibpmcr = ft.Container(
+            content=ft.Row(
+                controls=[
+                    self.btn_radio_play,
+                    ft.Column(
+                        controls=[
+                            ft.Row(
+                                controls=[
+                                    ft.Text("Rádio IBPM CR", size=FontScaleManager.s(15), weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE),
+                                    ft.Container(
+                                        content=ft.Text("AO VIVO 24H", size=FontScaleManager.s(9), weight=ft.FontWeight.BOLD, color="#FFFFFF"),
+                                        bgcolor=AppColors.PRIMARY_RUBI,
+                                        padding=AppPadding.symmetric(horizontal=6, vertical=2),
+                                        border_radius=6,
+                                    )
+                                ],
+                                spacing=6,
+                            ),
+                            ft.Text("Sintonize a Presença de Deus no Altar", size=FontScaleManager.s(12), color=AppColors.TEXT_SECONDARY),
+                            self.radio_status_text,
+                        ],
+                        expand=True,
+                        spacing=2,
+                    ),
+                    ft.IconButton(
+                        icon=Icons.FAVORITE,
+                        icon_color=AppColors.SECONDARY_GOLD,
+                        tooltip="Pedir Louvor / Oração na Rádio",
+                        on_click=lambda e: ShareEngine.share_whatsapp_status(
+                            self.app_page,
+                            "📻 *Pedido de Louvor & Oração - Rádio IBPM CR*\nPaz do Senhor! Gostaria de pedir oração e um louvor abençoado na Rádio IBPM CR!"
+                        )
+                    )
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                spacing=12,
+            ),
+            bgcolor=AppColors.BG_SURFACE,
+            padding=AppPadding.all(14),
+            border_radius=14,
+            border=AppBorder.all(1.2, AppColors.SECONDARY_GOLD),
             margin=AppMargin.only(bottom=14),
         )
 
-        # 3. WIDGET DA FRASE PROFÉTICA DO DIA (INTERATIVO POR SENTIMENTO)
+        # 4. WIDGET DA FRASE PROFÉTICA DO DIA (INTERATIVO POR SENTIMENTO)
         sentimentos_chips = [
             ("Todos", "todos"),
             ("Ansiedade", "ansiedade"),
@@ -299,18 +360,20 @@ class HomeView(ft.Container):
         # 4. ATALHOS RÁPIDOS SÊNIOR-FRIENDLY (Área de Toque >= 48dp)
         atalhos_grid = ft.Row(
             controls=[
-                self._criar_card_atalho("Dízimos & Ofertas", "Chave PIX Oficial", Icons.QR_CODE, AppColors.SECONDARY_GOLD, self.copiar_pix_oficial),
-                self._criar_card_atalho("Mural de Oração", "Pedir Oração", Icons.VOLUNTEER_ACTIVISM, AppColors.PRIMARY_RUBI, lambda e: self.ir_para_aba(1)),
-                self._criar_card_atalho("Bíblia & Estudos", "Ler a Palavra", Icons.MENU_BOOK, AppColors.ACCENT_BLUE, lambda e: self.ir_para_aba(2)),
+                self._criar_card_atalho("Dízimos", "Chave PIX", Icons.QR_CODE, AppColors.SECONDARY_GOLD, self.copiar_pix_oficial),
+                self._criar_card_atalho("Oração", "Intercessão", Icons.VOLUNTEER_ACTIVISM, AppColors.PRIMARY_RUBI, lambda e: self.ir_para_aba(1)),
+                self._criar_card_atalho("Estudos", "Palavra", Icons.MENU_BOOK, AppColors.ACCENT_BLUE, lambda e: self.ir_para_aba(2)),
+                self._criar_card_atalho("Como Chegar", "Templo & Cultos", Icons.LOCATION_ON, AppColors.SECONDARY_GOLD, self.abrir_modal_como_chegar),
             ],
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-            spacing=8,
+            spacing=6,
         )
 
         self.content = ft.ListView(
             controls=[
                 banner_ao_vivo,
                 card_audio_pilula,
+                card_radio_ibpmcr,
                 card_frase_profetica,
                 ft.Text("Acesso Rápido da Congregação", size=FontScaleManager.s(15), weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE),
                 ft.Container(height=4),
@@ -386,9 +449,120 @@ class HomeView(ft.Container):
             pass
         ShareEngine.show_feedback(self.app_page, "🎧 Áudio em reprodução! Pode bloquear a tela que o som continuará.")
 
+    def tocar_radio_ibpmcr(self, e):
+        track = AudioTrack(
+            title="Rádio IBPM CR • 24 Horas",
+            subtitle="Louvores do Altar & Ministrações Contínuas",
+            audio_url=os.getenv("RADIO_STREAM_URL", "https://stream.zeno.fm/f3wvbbqmdg8uv")
+        )
+        if self.audio_service.is_playing and self.audio_service.current_track and "Rádio IBPM" in self.audio_service.current_track.title:
+            self.audio_service.toggle_play_pause()
+            if self.radio_status_text:
+                self.radio_status_text.value = "⏸️ Rádio Pausada • Toque para sintonizar"
+                self.radio_status_text.color = AppColors.TEXT_MUTED
+            if self.btn_radio_play:
+                self.btn_radio_play.icon = Icons.PLAY_ARROW
+        else:
+            self.audio_service.play_track(track)
+            if self.radio_status_text:
+                self.radio_status_text.value = "▶️ Sintonizado • Tocando ao vivo em segundo plano"
+                self.radio_status_text.color = AppColors.SECONDARY_GOLD
+            if self.btn_radio_play:
+                self.btn_radio_play.icon = Icons.PAUSE
+            ShareEngine.show_feedback(self.app_page, "📻 Rádio IBPM CR sintonizada! Som contínuo em segundo plano.")
+        try:
+            self.app_page.update()
+        except Exception:
+            pass
+
     def copiar_pix_oficial(self, e):
         ShareEngine.copy_to_clipboard(self.app_page, CHAVE_PIX, f"✅ Chave PIX copiada: {CHAVE_PIX}")
 
     def ir_para_aba(self, indice_aba: int):
         if self.navigate_to_tab:
             self.navigate_to_tab(indice_aba)
+
+    def abrir_modal_como_chegar(self, e):
+        def fechar(ev):
+            try:
+                self.app_page.close(dlg)
+            except Exception:
+                dlg.open = False
+                self.app_page.update()
+
+        dlg = ft.AlertDialog(
+            modal=False,
+            title=ft.Row(
+                controls=[
+                    ft.Icon(Icons.CHURCH, color=AppColors.SECONDARY_GOLD, size=24),
+                    ft.Text("Templo Sede • IBPM CR", weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE, size=FontScaleManager.s(16)),
+                ],
+                spacing=8,
+            ),
+            content=ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Container(
+                            content=ft.Column(
+                                controls=[
+                                    ft.Text("📍 ENDEREÇO OFICIAL", size=FontScaleManager.s(11), weight=ft.FontWeight.BOLD, color=AppColors.PRIMARY_RUBI),
+                                    ft.Text("Rua Ajurana, 510 - Campo Grande / Carvalho Ramos", size=FontScaleManager.s(13), weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE),
+                                    ft.Text("Rio de Janeiro - RJ • CEP 23050-000", size=FontScaleManager.s(12), color=AppColors.TEXT_MUTED),
+                                ],
+                                spacing=2,
+                            ),
+                            bgcolor=AppColors.BG_DARK,
+                            padding=AppPadding.all(12),
+                            border_radius=10,
+                            border=AppBorder.all(1, AppColors.BORDER_DEFAULT),
+                        ),
+                        ft.Container(height=4),
+                        ft.Text("🗺️ TRAÇAR ROTA NO GPS:", size=FontScaleManager.s(12), weight=ft.FontWeight.BOLD, color=AppColors.SECONDARY_GOLD),
+                        ft.Row(
+                            controls=[
+                                ft.ElevatedButton(
+                                    content=ft.Row([ft.Icon(Icons.MAP, size=16), ft.Text("Google Maps")]),
+                                    style=ft.ButtonStyle(bgcolor=AppColors.PRIMARY_RUBI),
+                                    on_click=lambda ev: self.app_page.launch_url("https://www.google.com/maps/search/?api=1&query=Rua+Ajurana+510+Campo+Grande+Rio+de+Janeiro"),
+                                ),
+                                ft.OutlinedButton(
+                                    content=ft.Row([ft.Icon(Icons.DIRECTIONS_CAR, size=16), ft.Text("Waze")]),
+                                    style=ft.ButtonStyle(side=ft.BorderSide(1, AppColors.SECONDARY_GOLD), color=AppColors.SECONDARY_GOLD),
+                                    on_click=lambda ev: self.app_page.launch_url("https://waze.com/ul?q=Rua+Ajurana+510+Campo+Grande+Rio+de+Janeiro"),
+                                ),
+                            ],
+                            spacing=8,
+                        ),
+                        ft.Divider(color=AppColors.DIVIDER),
+                        ft.Text("🗓️ HORÁRIOS DOS CULTOS & CLAMORES:", size=FontScaleManager.s(12), weight=ft.FontWeight.BOLD, color=AppColors.SECONDARY_GOLD),
+                        ft.Text("• Domingo às 19h00: Culto da Família & Celebração Profética", size=FontScaleManager.s(13), color=AppColors.TEXT_WHITE),
+                        ft.Text("• Quarta às 19h30: Culto de Oração, Clamor & Doutrina", size=FontScaleManager.s(13), color=AppColors.TEXT_WHITE),
+                        ft.Text("• Sexta às 19h30: Reunião da Mocidade & Clamor", size=FontScaleManager.s(13), color=AppColors.TEXT_WHITE),
+                        ft.Text("• Diariamente às 06h00: Altar da Manhã & Intercessão", size=FontScaleManager.s(13), color=AppColors.TEXT_SECONDARY),
+                        ft.Container(height=4),
+                    ],
+                    tight=True,
+                    spacing=6,
+                ),
+                width=450,
+            ),
+            actions=[
+                ft.ElevatedButton(
+                    content=ft.Row([ft.Icon(Icons.CHAT, size=16), ft.Text("Falar com a Recepção")]),
+                    style=ft.ButtonStyle(bgcolor=AppColors.ACCENT_GREEN),
+                    on_click=lambda ev: ShareEngine.share_whatsapp_status(
+                        self.app_page,
+                        "🕊️ *Paz do Senhor!* Sou visitante no Super-App e gostaria de tirar dúvidas sobre o próximo culto presencial na IBPM CR!"
+                    ),
+                ),
+                ft.TextButton("Fechar", on_click=fechar),
+            ],
+            bgcolor=AppColors.BG_SURFACE,
+        )
+
+        try:
+            self.app_page.open(dlg)
+        except Exception:
+            self.app_page.dialog = dlg
+            dlg.open = True
+            self.app_page.update()

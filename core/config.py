@@ -13,13 +13,14 @@ load_dotenv(BASE_DIR / ".env")
 
 # Supabase
 SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
+SUPABASE_KEY = os.getenv("SUPABASE_SECRET_KEY") or os.getenv("SUPABASE_KEY", "")
+
 
 # Cloudflare R2
 R2_PUBLIC_URL = os.getenv("R2_PUBLIC_URL", "https://midia.ibpmcr.com.br")
 
 # DevWorld AI (Claude Sonnet 5)
-DEVWORLD_API_KEY = os.getenv("DEVWORLD_API_KEY", "dw_live_UgEYtrkRzOvCU-BV-IR8TvAzKBdsHoEnIROAq0OthLU")
+DEVWORLD_API_KEY = os.getenv("DEVWORLD_API_KEY", "")
 DEVWORLD_BASE_URL = os.getenv("DEVWORLD_BASE_URL", "https://chat.devwservices.shop/v1")
 DEVWORLD_MODEL = os.getenv("DEVWORLD_MODEL", "claude-sonnet-5[1m]")
 

@@ -1,0 +1,627 @@
+[
+  {
+    "frase": "Estou no meio da minha dor, mas escolho adorar; a cela não decide o meu louvor, a minha fé decide.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "Os olhos físicos já não veem o milagre, mas o mesmo Deus que curava antigamente é o mesmo Deus que cura hoje.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "O cordeiro mudo que foi levado ao matadouro voltará como leão da tribo de Judá para arrebatar a sua igreja.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "Onde abundou o pecado, superabundou a graça; fomos conquistados para as mansões celestiais por um favor que não merecemos.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "Deus tem o melhor para cada vida neste lugar; o que ainda não se realizou não foi esquecido por ele.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "Ele não vai te chamar pelo teu pecado, ele vai te chamar pelo teu nome.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "Não dê ouvidos às vozes que te dizem que você não é capaz; reconheça a voz do seu Mestre e avance.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "Quando a sua adoração sobe como perfume, o Pai se inclina para sentir o cheiro; não guarde silêncio diante dele.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "IBPM CR"
+  },
+  {
+    "frase": "A tempestade que você enfrenta hoje não veio para te afundar, veio para te ensinar a andar sobre as águas.",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Mt 14:29"
+  },
+  {
+    "frase": "Descanse o seu coração. Nenhuma oração sincera bate no teto e volta; todas sobem direto ao trono do Pai.",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ap 8:4"
+  },
+  {
+    "frase": "A ansiedade olha para o relógio; a fé descansa no tempo perfeito de Deus.",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Sl 37:7"
+  },
+  {
+    "frase": "Entregue o fardo pesado no altar. Deus não te chamou para carregar o peso do mundo nas costas.",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "1Pe 5:7"
+  },
+  {
+    "frase": "A paz de Deus que excede todo o entendimento vai guardar a sua mente contra todo desespero.",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Fp 4:7"
+  },
+  {
+    "frase": "Deus já esteve no seu amanhã e já preparou o livramento que você ainda nem sabe que precisa.",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Dt 31:8"
+  },
+  {
+    "frase": "O medo olha para o tamanho do gigante; a fé olha para o tamanho do Deus que derruba o gigante.",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "1Sm 17:45"
+  },
+  {
+    "frase": "Não tenha medo do que está à frente, pois Aquele que vai com você é maior do que tudo.",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Js 1:9"
+  },
+  {
+    "frase": "O perfeito amor de Deus lança fora todo o medo. Você é protegido pelo Sangue do Cordeiro.",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "1Jo 4:18"
+  },
+  {
+    "frase": "Quando o pavor tentar te paralisar, declare em voz alta: O Senhor é a minha luz e a minha salvação!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Sl 27:1"
+  },
+  {
+    "frase": "Mil cairão ao teu lado e dez mil à tua direita, mas tu não serás atingido.",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Sl 91:7"
+  },
+  {
+    "frase": "A mão que sustenta as estrelas no firmamento é a mesma que segura firme a sua mão hoje.",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Is 41:13"
+  },
+  {
+    "frase": "Não limite o agir de Deus pelo que seus olhos naturais estão vendo. O invisível de Deus já começou a se mover.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Hb 11:1"
+  },
+  {
+    "frase": "A fé não torna as coisas mais fáceis, torna as coisas possíveis pelo poder do Altíssimo.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Mc 9:23"
+  },
+  {
+    "frase": "Basta uma palavra que sai da boca de Deus para mudar a sentença que os homens deram para você.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Lc 7:7"
+  },
+  {
+    "frase": "Quando a sua fé entra em ação, o impossível perde a força diante do Criador.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Mt 17:20"
+  },
+  {
+    "frase": "Creia no meio da madrugada; o sol da justiça vai nascer trazendo cura nas suas asas.",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ml 4:2"
+  },
+  {
+    "frase": "A oração da fé move montanhas, abre mares e derruba muralhas. Persevere!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Tg 5:15"
+  },
+  {
+    "frase": "A gratidão abre as comportas do céu. Quem louva no pouco será colocado sobre o muito.",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "1Ts 5:18"
+  },
+  {
+    "frase": "Um coração grato atrai a presença manifesta de Deus e silencia a murmuração do inimigo.",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Sl 100:4"
+  },
+  {
+    "frase": "Em tudo dai graças, porque a gratidão transforma o pouco em fartura e a dor em sabedoria.",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ef 5:20"
+  },
+  {
+    "frase": "Louvar a Deus antes do milagre acontecer é o maior testemunho de fé que você pode dar.",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "At 16:25"
+  },
+  {
+    "frase": "Bendize, ó minha alma, ao Senhor, e não te esqueças de nenhum de seus benefícios.",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Sl 103:2"
+  },
+  {
+    "frase": "Você não nasceu para ficar caído na beira do caminho. Levante-se, porque a unção de Deus é sobre a sua casa!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Is 60:1"
+  },
+  {
+    "frase": "O que o diabo armou contra você se tornará o palco da maior reviravolta da sua história.",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Gn 50:20"
+  },
+  {
+    "frase": "Não há condenação para os que estão em Cristo Jesus. A sua vitória foi selada na cruz!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Rm 8:1"
+  },
+  {
+    "frase": "A porta que Deus abre para a sua vida, nenhum homem ou potestade do inferno tem poder para fechar.",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ap 3:8"
+  },
+  {
+    "frase": "Você não é vítima das circunstâncias; você é herdeiro da promessa de Cristo!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Rm 8:17"
+  },
+  {
+    "frase": "O leão da tribo de Judá rugiu a favor da sua família. A vitória é nossa!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ap 5:5"
+  },
+  {
+    "frase": "Deus trabalha no silêncio. Enquanto você chora no altar, Ele já está dando a ordem da sua vitória.",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Sl 126:5"
+  },
+  {
+    "frase": "Não desista agora. A última palavra sobre a sua vida quem dá é Aquele que venceu a morte.",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Gl 6:9"
+  },
+  {
+    "frase": "O choro pode durar uma noite inteira, mas a alegria incontível vem pela manhã.",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Sl 30:5"
+  },
+  {
+    "frase": "Quando você não tiver forças para orar, o Espírito Santo intercederá por você com gemidos inexprimíveis.",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Rm 8:26"
+  },
+  {
+    "frase": "Deus é especialista em transformar cinzas em coroa de glória e deserto em manancial de águas.",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Is 61:3"
+  },
+  {
+    "frase": "O mesmo Deus que esteve com você nas vitórias de ontem está sustentando você na luta de hoje.",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Hb 13:8"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: DESANIMO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "desanimo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: ANSIEDADE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "ansiedade",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: MEDO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "medo",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: FE não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "fe",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: GRATIDAO não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "gratidao",
+    "referencia_biblica": "Ag 2:9"
+  },
+  {
+    "frase": "No Altar da IBPM CR, declaramos: VITORIA não governará a sua mente. A glória da segunda casa será maior que a da primeira!",
+    "sentimento_tag": "vitoria",
+    "referencia_biblica": "Ag 2:9"
+  }
+]

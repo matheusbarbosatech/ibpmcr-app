@@ -196,13 +196,17 @@ def test_suite():
     # 7. PalavraView e FotosView
     print("\n[7/8] Testando PalavraView e FotosView...")
     palavra = PalavraView(page)
-    # Testa alternância das 4 sub-abas
+    # Testa alternância das 5 sub-abas
     palavra.mudar_sub_aba(1)  # Bíblia
     assert palavra.active_tab_index == 1
     palavra.mudar_sub_aba(2)  # Livros
     assert palavra.active_tab_index == 2
     palavra.mudar_sub_aba(3)  # Escola
     assert palavra.active_tab_index == 3
+    palavra.mudar_sub_aba(4)  # Coletânea de Louvores / Hinário
+    assert palavra.active_tab_index == 4
+    palavra._filtrar_hinario("Porque Ele Vive")
+    assert palavra.busca_louvor == "Porque Ele Vive"
     palavra.mudar_sub_aba(0)  # Devocional
     assert palavra.active_tab_index == 0
 
@@ -212,7 +216,7 @@ def test_suite():
     assert fotos.active_subtab == 1
     fotos.alternar_subtab(0)
     assert fotos.active_subtab == 0
-    print("  -> PalavraView (Devocional, Bíblia, Livros, Escola) e FotosView (Galeria HD e Cortes) validadas.")
+    print("  -> PalavraView (Devocional, Bíblia, Livros, Escola, Hinário) e FotosView (Galeria HD e Cortes) validadas.")
 
     # 8. Orquestrador Geral main.py
     print("\n[8/8] Testando Orquestrador Principal (main.py)...")

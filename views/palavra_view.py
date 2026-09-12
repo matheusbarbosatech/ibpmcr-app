@@ -20,9 +20,11 @@ class PalavraView(ft.Container):
         self.app_page = page
         self.db = DatabaseService()
         self.audio_service = AudioService()
-        self.active_tab_index = 0  # 0: Devocional, 1: Bíblia, 2: Livros, 3: Escola
+        self.active_tab_index = 0  # 0: Devocional, 1: Bíblia, 2: Livros, 3: Escola, 4: Hinário
         self.dynamic_content_container = ft.Container(expand=True)
         self.dia_devocional_ativo = 1
+        self.busca_louvor = ""
+        self.cat_louvor_ativa = "Todos"
 
         FontScaleManager.register_listener(self.on_font_scale_changed)
         self.build_ui()
@@ -37,12 +39,12 @@ class PalavraView(ft.Container):
     def build_ui(self):
         self.padding = AppPadding.all(12)
 
-        # Seletor de Sub-Abas Sênior-Friendly (Botões Grandes)
         sub_abas = [
             ("Devocional 365", Icons.AUTO_STORIES, 0),
             ("Bíblia Sagrada", Icons.MENU_BOOK, 1),
             ("Livros & E-books", Icons.IMPORT_CONTACTS, 2),
             ("Escola de Líderes", Icons.SCHOOL, 3),
+            ("Coletânea de Louvores", Icons.MUSIC_NOTE, 4),
         ]
 
         botoes_sub_abas = []
@@ -104,6 +106,8 @@ class PalavraView(ft.Container):
             self.dynamic_content_container.content = self._render_livros_view()
         elif self.active_tab_index == 3:
             self.dynamic_content_container.content = self._render_escola_view()
+        elif self.active_tab_index == 4:
+            self.dynamic_content_container.content = self._render_hinario_view()
 
     # 1. SUB-ABA DEVOCIONAL '365 DIAS NO ALTAR'
     def _render_devocional_view(self):
@@ -558,3 +562,219 @@ class PalavraView(ft.Container):
             self.app_page.dialog = dlg
             dlg.open = True
             self.app_page.update()
+
+    # 5. SUB-ABA COLETÂNEA DE LOUVORES & HINÁRIO DO ALTAR (ESTILO MARANATA)
+    def _render_hinario_view(self):
+        louvores = [
+            {
+                "numero": 1,
+                "titulo": "Porque Ele Vive",
+                "categoria": "Harpa & Clássicos",
+                "autor": "Bill & Gloria Gaither",
+                "letra": "Deus enviou Seu Filho amado\nPra me salvar e perdoar\nNa cruz morreu por meus pecados\nMas ressurgiu e vivo com o Pai está!\n\nPorque Ele vive, posso crer no amanhã\nPorque Ele vive, temor não há!\nMas eu bem sei, eu sei que a minha vida\nEstá nas mãos de meu Jesus que vivo está!\n\nE quando, enfim, chegar a hora\nEm que a morte enfrentarei\nSem medo, então, terei vitória\nIrei à Glória, ao meu Jesus que vivo está!"
+            },
+            {
+                "numero": 2,
+                "titulo": "Alvo Mais Que a Neve",
+                "categoria": "Harpa & Clássicos",
+                "autor": "Harpa Cristã Nº 39",
+                "letra": "Bendito seja o Cordeiro\nQue na cruz por nós padeceu!\nBendito seja o Seu sangue\nQue por nós ali Ele verteu!\n\nAlvo mais que a neve!\nAlvo mais que a neve!\nSim, nesse sangue lavado\nMais alvo que a neve serei!\n\nQuão quebrantado e contrito\nVenho a Ti, Senhor, me prostrar\nPara que o sangue bendito\nVenha a minha alma lavar!"
+            },
+            {
+                "numero": 3,
+                "titulo": "Em Fervente Oração",
+                "categoria": "Adoração & Oração",
+                "autor": "Harpa Cristã Nº 577",
+                "letra": "Em fervente oração, vem o teu coração\nNa presença de Deus derramar!\nMas não podes fruir o que estás a pedir\nSe tudo no altar não deixar!\n\nDeixa tudo no altar!\nDeixa tudo no altar!\nE a bênção de Deus, prometida dos céus\nNa tua alma irá transbordar!"
+            },
+            {
+                "numero": 4,
+                "titulo": "Grandioso És Tu",
+                "categoria": "Harpa & Clássicos",
+                "autor": "Harpa Cristã Nº 526",
+                "letra": "Senhor meu Deus, quando eu maravilhado\nFico a pensar nas obras de Tuas mãos\nNo céu azul de estrelas pontilhado\nO Seu poder mostrando a criação!\n\nEntão minh'alma canta a Ti, Senhor:\nGrandioso és Tu! Grandioso és Tu!\nEntão minh'alma canta a Ti, Senhor:\nGrandioso és Tu! Grandioso és Tu!"
+            },
+            {
+                "numero": 5,
+                "titulo": "Os Guerreiros se Preparam",
+                "categoria": "Guerra Espiritual",
+                "autor": "Harpa Cristã Nº 212",
+                "letra": "Os guerreiros se preparam para a grande voz de Deus\nEia avante, ó soldados de Sião!\nJá ouvimos o estrondo dos inimigos nos céus\nMas em Cristo nós temos a salvação!\n\nQuem irá lutar por Cristo? Quem a fronte erguerá?\nQuem na cruz achou perdão e vida traz?\nEis que o Mestre está chamando, quem a voz escutará?\nEis-me aqui, envia-me a mim, Senhor!"
+            },
+            {
+                "numero": 6,
+                "titulo": "Vem, Senhor, e Faz de Novo",
+                "categoria": "Corinhos de Fogo",
+                "autor": "Avivamento Pentecostal",
+                "letra": "Vem, Senhor, e faz de novo\nO Teu fogo descer sobre este povo!\nAcende o altar, batiza com poder\nNós queremos Tua glória e Teu mover!\n\nDesce fogo do altar!\nDesce fogo do altar!\nA Igreja clama, a Igreja adora\nO Espírito Santo desce agora!"
+            },
+            {
+                "numero": 7,
+                "titulo": "Ele é o Deus dos Deuses",
+                "categoria": "Vitória & Celebração",
+                "autor": "Louvor do Altar",
+                "letra": "Ele é o Deus dos deuses, Senhor dos senhores\nA Ele a glória, a força e o louvor!\nCadeias se quebram, muralhas vão cair\nQuando a Igreja de joelhos começa a pedir!\n\nAleluia, aleluia! O Todo-Poderoso reina aqui!\nAleluia, aleluia! Ninguém pode impedir o Teu agir!"
+            },
+            {
+                "numero": 8,
+                "titulo": "A Mensagem da Cruz",
+                "categoria": "Harpa & Clássicos",
+                "autor": "Harpa Cristã Nº 291",
+                "letra": "Rude cruz se erigiu, dela o dia fugiu\nComo emblema de vergonha e dor\nMas eu amo essa cruz, sobre a qual meu Jesus\nDeu a vida por mim, pecador!\n\nSim, eu amo a mensagem da cruz\n'Té morrer eu a vou proclamar\nLevarei eu também minha cruz\n'Té por uma coroa trocar!"
+            }
+        ]
+
+        # Filtro de busca e categoria
+        filtrados = []
+        for l in louvores:
+            matches_busca = (
+                not self.busca_louvor or 
+                self.busca_louvor.lower() in l["titulo"].lower() or 
+                self.busca_louvor.lower() in l["letra"].lower() or
+                self.busca_louvor in str(l["numero"])
+            )
+            matches_cat = (self.cat_louvor_ativa == "Todos" or l["categoria"] == self.cat_louvor_ativa)
+            if matches_busca and matches_cat:
+                filtrados.append(l)
+
+        # Barra de Pesquisa
+        campo_busca = ft.TextField(
+            hint_text="Buscar louvor por nome, número ou trecho...",
+            prefix_icon=Icons.SEARCH,
+            border_color=AppColors.BORDER_DEFAULT,
+            focused_border_color=AppColors.PRIMARY_RUBI,
+            text_style=ft.TextStyle(color=AppColors.TEXT_WHITE),
+            value=self.busca_louvor,
+            on_change=lambda e: self._filtrar_hinario(e.control.value),
+        )
+
+        categorias = ["Todos", "Harpa & Clássicos", "Corinhos de Fogo", "Adoração & Oração", "Guerra Espiritual"]
+        chips = []
+        for cat in categorias:
+            is_active = (self.cat_louvor_ativa == cat)
+            chip = ft.Container(
+                content=ft.Text(cat, size=FontScaleManager.s(12), weight=ft.FontWeight.BOLD if is_active else ft.FontWeight.NORMAL, color=AppColors.TEXT_WHITE if is_active else AppColors.TEXT_SECONDARY),
+                bgcolor=AppColors.PRIMARY_RUBI if is_active else AppColors.BG_SURFACE_ALT,
+                padding=AppPadding.symmetric(horizontal=10, vertical=6),
+                border_radius=8,
+                on_click=lambda e, c=cat: self._mudar_cat_hinario(c),
+            )
+            chips.append(chip)
+
+        # Cards dos Louvores
+        cards_louvores = []
+        for l in filtrados:
+            card = ft.Container(
+                content=ft.Row(
+                    controls=[
+                        ft.Container(
+                            content=ft.Text(f"#{l['numero']:02d}", size=FontScaleManager.s(14), weight=ft.FontWeight.BOLD, color="#FFFFFF"),
+                            bgcolor=AppColors.PRIMARY_RUBI,
+                            padding=AppPadding.all(10),
+                            border_radius=10,
+                        ),
+                        ft.Column(
+                            controls=[
+                                ft.Text(l["titulo"], size=FontScaleManager.s(15), weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE),
+                                ft.Text(f"{l['categoria']} • {l['autor']}", size=FontScaleManager.s(12), color=AppColors.SECONDARY_GOLD),
+                            ],
+                            expand=True,
+                            spacing=2,
+                        ),
+                        ft.IconButton(
+                            icon=Icons.VISIBILITY,
+                            icon_color=AppColors.TEXT_WHITE,
+                            tooltip="Ver Letra Completa",
+                            on_click=lambda e, louv=l: self._abrir_modal_louvor(louv),
+                        )
+                    ],
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                    spacing=10,
+                ),
+                bgcolor=AppColors.BG_SURFACE,
+                padding=AppPadding.all(12),
+                border_radius=12,
+                border=AppBorder.all(1, AppColors.BORDER_DEFAULT),
+                on_click=lambda e, louv=l: self._abrir_modal_louvor(louv),
+            )
+            cards_louvores.append(card)
+
+        return ft.ListView(
+            controls=[
+                campo_busca,
+                ft.Container(height=4),
+                ft.Row(controls=chips, scroll=ft.ScrollMode.AUTO, spacing=6),
+                ft.Container(height=6),
+                *cards_louvores,
+                ft.Container(height=30),
+            ],
+            expand=True,
+            spacing=8,
+        )
+
+    def _filtrar_hinario(self, texto: str):
+        self.busca_louvor = texto
+        self.render_active_tab()
+        try:
+            self.app_page.update()
+        except Exception:
+            pass
+
+    def _mudar_cat_hinario(self, cat: str):
+        self.cat_louvor_ativa = cat
+        self.render_active_tab()
+        try:
+            self.app_page.update()
+        except Exception:
+            pass
+
+    def _abrir_modal_louvor(self, louvor: dict):
+        def fechar(e):
+            try:
+                self.app_page.close(dlg)
+            except Exception:
+                dlg.open = False
+                self.app_page.update()
+
+        dlg = ft.AlertDialog(
+            modal=False,
+            title=ft.Row(
+                controls=[
+                    ft.Text(f"#{louvor['numero']:02d} • {louvor['titulo']}", weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE, size=FontScaleManager.s(16)),
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            ),
+            content=ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text(f"🎵 {louvor['categoria']} ({louvor['autor']})", size=FontScaleManager.s(12), color=AppColors.SECONDARY_GOLD, weight=ft.FontWeight.BOLD),
+                        ft.Divider(color=AppColors.DIVIDER),
+                        ft.Text(louvor["letra"], size=FontScaleManager.s(14), color=AppColors.TEXT_WHITE, selectable=True),
+                    ],
+                    scroll=ft.ScrollMode.AUTO,
+                    spacing=8,
+                ),
+                width=450,
+                height=400,
+            ),
+            actions=[
+                ft.ElevatedButton(
+                    content=ft.Row([ft.Icon(Icons.SHARE, size=16), ft.Text("Compartilhar Letra")]),
+                    style=ft.ButtonStyle(bgcolor=AppColors.PRIMARY_RUBI),
+                    on_click=lambda e: ShareEngine.share_whatsapp_status(
+                        self.app_page,
+                        f"🎵 *{louvor['titulo']}*\n\n{louvor['letra']}\n\n🙏 Louvado na IBPM CR"
+                    ),
+                ),
+                ft.TextButton("Fechar", on_click=fechar),
+            ],
+            bgcolor=AppColors.BG_SURFACE,
+        )
+
+        try:
+            self.app_page.open(dlg)
+        except Exception:
+            self.app_page.dialog = dlg
+            dlg.open = True
+            self.app_page.update()
+
