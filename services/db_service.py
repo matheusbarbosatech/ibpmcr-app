@@ -526,6 +526,10 @@ class DatabaseService:
                 imagem_url=r["imagem_url"], link_maps=r["link_maps"], ativo=bool(r["ativo"])
             ) for r in rows]
 
+    def get_evento_ativo(self) -> Optional[EventoIgreja]:
+        eventos = self.get_eventos()
+        return eventos[0] if eventos else None
+
     def get_evento_por_id(self, evento_id: int) -> Optional[EventoIgreja]:
         with self.get_connection() as conn:
             cursor = conn.cursor()
