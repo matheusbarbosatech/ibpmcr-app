@@ -76,7 +76,8 @@
 
 | # | Prioridade | Tarefa | Módulo Envolvido | Tempo Estimado |
 |---|---|---|---|---|
-| **1** | 🟢 **BAIXA** | [**Configurar Streaming Oficial da Web Rádio (Zeno.fm - Opcional)**](#-tarefa-1-configurar-streaming-oficial-da-web-rádio-zenofm) | Áudio / Rádio | 10 min |
+| **1** | 🟡 **MÉDIA** | [**🎙️ Produzir & Integrar o Mega-Ecossistema de Áudio**](#-tarefa-1-produzir--integrar-o-mega-ecossistema-de-áudio) | Áudio / IA / R2 | 20 min |
+| **2** | 🟢 **BAIXA** | [**Configurar Streaming Externo no Zeno.fm (Opcional)**](#-tarefa-2-configurar-streaming-externo-no-zenofm-opcional) | Áudio / Rádio | 10 min |
 
 ---
 
@@ -84,13 +85,25 @@
 
 ---
 
-### 🟢 Tarefa 1: Configurar Streaming Oficial da Web Rádio (Zeno.fm)
-* **Objetivo:** Customizar a transmissão contínua da rádio 24h com louvores pentecostais e áudios de pregações do Pastor Anderson Medeiros.
+### 🟡 Tarefa 1: Produzir & Integrar o Mega-Ecossistema de Áudio
+* **Objetivo:** Gerar as narrações de alta fidelidade dos **365 Devocionais**, dos **3 Audiobooks** (*Vitória na Família*, *Guerra Espiritual*, *Fundamentos da Fé*) e das **52 Lições da Escola de Líderes** com voz neural solene e fundo musical suave de adoração, hospedando no Cloudflare R2 e alimentando a **Web Rádio 24h** junto aos **460 Cultos Gravados**.
+* **Relatório Técnico Detalhado:** [docs/MEGA_RELATORIO_ECOSSISTEMA_AUDIO_IBPMCR.md](file:///c:/Users/matheus/Desktop/ibpmcr-app/docs/MEGA_RELATORIO_ECOSSISTEMA_AUDIO_IBPMCR.md)
+* **Como Executar:**
+  1. Rodar o script de síntese de áudio neural com Microsoft Edge TTS (`pt-BR-AntonioNeural`):
+     ```powershell
+     python scripts/gerar_audios_ia_ativos.py
+     ```
+  2. Fazer o envio em lote para o Cloudflare R2 no bucket `ibpmcr-midia`.
+  3. Atualizar as URLs dos botões *"Ouvir em Áudio"* e a playlist rotativa da Web Rádio no app.
+
+---
+
+### 🟢 Tarefa 2: Configurar Streaming Externo no Zeno.fm (Opcional)
+* **Objetivo:** Customizar uma emissora externa na nuvem para receber a transmissão direta da mesa de som do templo durante os cultos presenciais.
 * **Passo a Passo:**
   1. Criar conta gratuita no [Zeno.fm](https://zeno.fm).
-  2. Subir arquivos MP3 no AutoDJ ou conectar a transmissão ao vivo da mesa de som do templo.
-  3. Copiar a URL direta de streaming gerada (ex: `https://stream.zeno.fm/xyz123abc`).
-  4. Atualizar a variável `RADIO_STREAM_URL` no arquivo `.env`.
+  2. Subir arquivos MP3 no AutoDJ ou conectar o OBS/vMix da igreja.
+  3. Copiar a URL de streaming e atualizar `RADIO_STREAM_URL` no `.env`.
 
 ---
 
