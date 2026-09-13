@@ -44,21 +44,14 @@
 
 ---
 
-### 🟢 5. Deep Research Completa de Mini-Jogos Bíblicos & Gamificação
-- **Relatório Oficial Criado:** Salvo em [docs/RELATORIO_JOGOS_BIBLICOS.md](file:///c:/Users/matheus/Desktop/ibpmcr-app/docs/RELATORIO_JOGOS_BIBLICOS.md).
-- **5 Mini-Jogos Mapeados:** Palavra do Dia (Wordle Bíblico), Show da Fé (Quiz de 3 Níveis), Quem Sou Eu? (Detetive Bíblico), Ordene o Versículo e Memória Kids.
-- **Sistema de Patentes Espirituais:** 5 níveis de sabedoria (*Discípulo de Beréia* a *Embaixador do Reino*) com armazenamento offline-first.
-
----
-
-### 🟢 6. Novas Telas: Web Rádio 24h & Hinário Digital (Coletânea de Louvores)
+### 🟢 5. Novas Telas: Web Rádio 24h & Hinário Digital (Coletânea de Louvores)
 - **Web Rádio IBPM CR 24h:** Player no topo do Altar com áudio contínuo em background (tela bloqueada).
 - **Coletânea de Louvores (100 Hinos):** 5ª sub-aba em *Palavra & Estudos* com busca instantânea e categorias pentecostais.
 - **Rotas & Templo:** Modal inteligente com rotas de 1 toque no Google Maps e Waze para a igreja em Campo Grande - RJ.
 
 ---
 
-### 🟢 7. Mega-Patrimônio Teológico & Espiritual Integrado
+### 🟢 6. Mega-Patrimônio Teológico & Espiritual Integrado
 - **365 Devocionais Diários:** Todos os 365 dias do ano mapeados com versículo, reflexão do Pastor Anderson, oração e desafio prático.
 - **52 Módulos da Escola de Líderes:** Formação anual de discipulado com apostilas e Quizzes interativos.
 - **3 Livros Digitais Oficiais:** *Vitória na Família*, *Guerra Espiritual* e *Fundamentos da Fé*.
@@ -66,13 +59,13 @@
 
 ---
 
-### 🟢 8. Banco de Dados Duplo: Nuvem (Supabase) + Offline-First (SQLite Local)
+### 🟢 7. Banco de Dados Duplo: Nuvem (Supabase) + Offline-First (SQLite Local)
 - **Supabase Cloud (PostgreSQL 15+):** Operacional no endpoint `https://gbubafojvadeetwsqlwp.supabase.co`.
 - **SQLite Local (`data/ibpmcr_local.db`):** 100% populado para funcionamento offline sem sinal de internet.
 
 ---
 
-### 🟢 9. Upload dos 576 Cortes para Cloudflare R2
+### 🟢 8. Upload dos 576 Cortes para Cloudflare R2
 - **Manifesto de Controle:** `data/r2_cortes_manifest.json` com 1.151 arquivos (9.39 GB) enviados com sucesso.
 
 ---
@@ -83,8 +76,7 @@
 
 | # | Prioridade | Tarefa | Módulo Envolvido | Tempo Estimado |
 |---|---|---|---|---|
-| **1** | 🟡 **MÉDIA** | [**🎮 Implementar Módulo de Mini-Jogos Bíblicos**](#-tarefa-1-implementar-módulo-de-mini-jogos-bíblicos) | Telas / Jogos | 1 dia |
-| **2** | 🟢 **BAIXA** | [**Configurar Streaming Oficial da Web Rádio (Zeno.fm - Opcional)**](#-tarefa-2-configurar-streaming-oficial-da-web-rádio-zenofm) | Áudio / Rádio | 10 min |
+| **1** | 🟢 **BAIXA** | [**Configurar Streaming Oficial da Web Rádio (Zeno.fm - Opcional)**](#-tarefa-1-configurar-streaming-oficial-da-web-rádio-zenofm) | Áudio / Rádio | 10 min |
 
 ---
 
@@ -92,23 +84,13 @@
 
 ---
 
-### 🟡 Tarefa 1: Implementar Módulo de Mini-Jogos Bíblicos
-* **Objetivo:** Desenvolver a **6ª Sub-Aba de Palavra & Estudos** com jogos cristãos pedagógicos baseados no relatório [docs/RELATORIO_JOGOS_BIBLICOS.md](file:///c:/Users/matheus/Desktop/ibpmcr-app/docs/RELATORIO_JOGOS_BIBLICOS.md).
-* **Mini-Jogos Previstos:**
-  1. 🟩 **Palavra Bíblica do Dia (Wordle / Termo):** Adivinhar palavra bíblica em 6 tentativas com feedback por cores e versículo pós-vitória.
-  2. 🏆 **Show da Fé (Quiz Bíblico):** Perguntas com 3 níveis (Iniciante, Valente e Mestre) com ajudas `50:50` e `Dica do Pastor`.
-  3. 🕵️ **Quem Sou Eu?:** Enigma de dedução com 4 pistas graduais de personagens bíblicos.
-  4. 📖 **Ordene o Versículo:** Desafio de memorização ordenando palavras embaralhadas.
-  5. 👶 **Memória Kids:** Jogo da memória lúdico com os Heróis da Fé.
-
----
-
-### 🟢 Tarefa 2: Configurar Streaming Oficial da Web Rádio (Zeno.fm)
-* **Objetivo:** Customizar a grade 24h da rádio com louvores pentecostais e pregações do Pastor Anderson.
+### 🟢 Tarefa 1: Configurar Streaming Oficial da Web Rádio (Zeno.fm)
+* **Objetivo:** Customizar a transmissão contínua da rádio 24h com louvores pentecostais e áudios de pregações do Pastor Anderson Medeiros.
 * **Passo a Passo:**
   1. Criar conta gratuita no [Zeno.fm](https://zeno.fm).
-  2. Subir arquivos MP3 no AutoDJ.
-  3. Copiar a URL direta de streaming e atualizar `RADIO_STREAM_URL` no `.env`.
+  2. Subir arquivos MP3 no AutoDJ ou conectar a transmissão ao vivo da mesa de som do templo.
+  3. Copiar a URL direta de streaming gerada (ex: `https://stream.zeno.fm/xyz123abc`).
+  4. Atualizar a variável `RADIO_STREAM_URL` no arquivo `.env`.
 
 ---
 
