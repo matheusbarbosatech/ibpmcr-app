@@ -10,6 +10,7 @@ from core.config import YOUTUBE_LIVE_URL, CHAVE_PIX
 from core.audio_service import AudioService, AudioTrack
 from services.db_service import DatabaseService
 from services.share_engine import ShareEngine
+from views.lojinha_view import LojinhaModal, InscricaoEventoModal, CompraProdutoModal
 
 class HomeView(ft.Container):
     def __init__(self, page: ft.Page, navigate_to_tab=None):
@@ -358,13 +359,113 @@ class HomeView(ft.Container):
             margin=AppMargin.only(bottom=14),
         )
 
+        # BANNER DE DESTAQUE: RETIRO FACE A FACE COM DEUS
+        eventos = self.db.get_eventos()
+        evento_face = eventos[0] if eventos else None
+        
+        banner_evento_face = None
+        if evento_face:
+            banner_evento_face = ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Row(
+                            controls=[
+                                ft.Container(
+                                    content=ft.Row(
+                                        controls=[
+                                            ft.Icon(Icons.LOCAL_FIRE_DEPARTMENT, color="#FFFFFF", size=14),
+                                            ft.Text("GRANDE EVENTO OFICIAL", size=FontScaleManager.s(10), weight=ft.FontWeight.BOLD, color="#FFFFFF"),
+                                        ],
+                                        spacing=4,
+                                    ),
+                                    bgcolor=AppColors.PRIMARY_RUBI,
+                                    padding=AppPadding.symmetric(horizontal=8, vertical=3),
+                                    border_radius=8,
+                                ),
+                                ft.Text(f"📅 {evento_face.data_evento}", size=FontScaleManager.s(11), weight=ft.FontWeight.BOLD, color=AppColors.SECONDARY_GOLD),
+                            ],
+                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                        ),
+                        ft.Text(evento_face.titulo, size=FontScaleManager.s(17), weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE),
+                        ft.Text(f"🔥 {evento_face.slogan}", size=FontScaleManager.s(12), weight=ft.FontWeight.BOLD, color=AppColors.SECONDARY_GOLD),
+                        ft.Text(evento_face.descricao, size=FontScaleManager.s(12), color=AppColors.TEXT_SECONDARY),
+                        ft.Container(height=4),
+                        ft.Row(
+                            controls=[
+                                ft.ElevatedButton(
+                                    content=ft.Row(
+                                        controls=[
+                                            ft.Icon(Icons.EDIT_DOCUMENT, color="#000000", size=16),
+                                            ft.Text("Inscrição no App", color="#000000", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(11)),
+                                        ],
+                                        spacing=4,
+                                    ),
+                                    style=ft.ButtonStyle(
+                                        bgcolor=AppColors.SECONDARY_GOLD,
+                                        shape=ft.RoundedRectangleBorder(radius=8),
+                                        padding=AppPadding.symmetric(horizontal=10, vertical=10),
+                                    ),
+                                    on_click=lambda e, ev=evento_face: InscricaoEventoModal.abrir(self.app_page, ev),
+                                ),
+                                ft.ElevatedButton(
+                                    content=ft.Row(
+                                        controls=[
+                                            ft.Icon(Icons.CHECKROOM, color="#FFFFFF", size=16),
+                                            ft.Text("Camisa Oficial", color="#FFFFFF", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(11)),
+                                        ],
+                                        spacing=4,
+                                    ),
+                                    style=ft.ButtonStyle(
+                                        bgcolor=AppColors.PRIMARY_RUBI,
+                                        shape=ft.RoundedRectangleBorder(radius=8),
+                                        padding=AppPadding.symmetric(horizontal=10, vertical=10),
+                                    ),
+                                    on_click=lambda e: self.abrir_compra_camisa_face(),
+                                ),
+                                ft.OutlinedButton(
+                                    content=ft.Row(
+                                        controls=[
+                                            ft.Icon(Icons.INFO_OUTLINE, color=AppColors.SECONDARY_GOLD, size=16),
+                                            ft.Text("Detalhes", color=AppColors.SECONDARY_GOLD, weight=ft.FontWeight.BOLD, size=FontScaleManager.s(11)),
+                                        ],
+                                        spacing=4,
+                                    ),
+                                    style=ft.ButtonStyle(
+                                        side=ft.BorderSide(1, AppColors.SECONDARY_GOLD),
+                                        shape=ft.RoundedRectangleBorder(radius=8),
+                                        padding=AppPadding.symmetric(horizontal=8, vertical=10),
+                                    ),
+                                    on_click=lambda e, ev=evento_face: self.abrir_modal_detalhes_evento(ev),
+                                ),
+                            ],
+                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                        )
+                    ],
+                    spacing=6,
+                ),
+                bgcolor=AppColors.BG_SURFACE,
+                padding=AppPadding.all(14),
+                border_radius=16,
+                border=AppBorder.all(1.5, AppColors.SECONDARY_GOLD),
+                margin=AppMargin.only(bottom=12),
+            )
+
         # 4. ATALHOS RÁPIDOS SÊNIOR-FRIENDLY (Área de Toque >= 48dp)
-        atalhos_grid = ft.Row(
+        atalhos_grid_1 = ft.Row(
             controls=[
-                self._criar_card_atalho("Dízimos", "Chave PIX", Icons.QR_CODE, AppColors.SECONDARY_GOLD, self.copiar_pix_oficial),
-                self._criar_card_atalho("Oração", "Intercessão", Icons.VOLUNTEER_ACTIVISM, AppColors.PRIMARY_RUBI, lambda e: self.ir_para_aba(1)),
-                self._criar_card_atalho("Estudos", "Palavra", Icons.MENU_BOOK, AppColors.ACCENT_BLUE, lambda e: self.ir_para_aba(2)),
-                self._criar_card_atalho("Como Chegar", "Templo & Cultos", Icons.LOCATION_ON, AppColors.SECONDARY_GOLD, self.abrir_modal_como_chegar),
+                self._criar_card_atalho("Lojinha", "Cantina & Loja", Icons.STOREFRONT, AppColors.SECONDARY_GOLD, self.abrir_lojinha),
+                self._criar_card_atalho("Dízimos", "Chave PIX", Icons.QR_CODE, AppColors.PRIMARY_RUBI, self.copiar_pix_oficial),
+                self._criar_card_atalho("Oração", "Intercessão", Icons.VOLUNTEER_ACTIVISM, AppColors.ACCENT_BLUE, lambda e: self.ir_para_aba(1)),
+            ],
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            spacing=6,
+        )
+
+        atalhos_grid_2 = ft.Row(
+            controls=[
+                self._criar_card_atalho("Estudos", "Palavra & Bíblia", Icons.MENU_BOOK, AppColors.SECONDARY_GOLD, lambda e: self.ir_para_aba(2)),
+                self._criar_card_atalho("Fotos", "Galeria & Shorts", Icons.PHOTO_LIBRARY, AppColors.PRIMARY_RUBI, lambda e: self.ir_para_aba(3)),
+                self._criar_card_atalho("Como Chegar", "Templo & GPS", Icons.LOCATION_ON, AppColors.ACCENT_BLUE, self.abrir_modal_como_chegar),
             ],
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             spacing=6,
@@ -373,12 +474,15 @@ class HomeView(ft.Container):
         self.content = ft.ListView(
             controls=[
                 banner_ao_vivo,
+                banner_evento_face if banner_evento_face else ft.Container(),
                 card_audio_pilula,
                 card_radio_ibpmcr,
                 card_frase_profetica,
                 ft.Text("Acesso Rápido da Congregação", size=FontScaleManager.s(15), weight=ft.FontWeight.BOLD, color=AppColors.TEXT_WHITE),
                 ft.Container(height=4),
-                atalhos_grid,
+                atalhos_grid_1,
+                ft.Container(height=6),
+                atalhos_grid_2,
                 ft.Container(height=30),
             ],
             expand=True,
@@ -571,3 +675,91 @@ class HomeView(ft.Container):
             self.app_page.dialog = dlg
             dlg.open = True
             self.app_page.update()
+
+    def abrir_lojinha(self, e=None):
+        LojinhaModal.abrir(self.app_page)
+
+    def abrir_compra_camisa_face(self, e=None):
+        produtos = self.db.get_produtos_loja()
+        camisa = next((p for p in produtos if "Face a Face" in p.nome), produtos[0] if produtos else None)
+        if camisa:
+            CompraProdutoModal.abrir(self.app_page, camisa)
+        else:
+            LojinhaModal.abrir(self.app_page)
+
+    def abrir_modal_detalhes_evento(self, evento, e=None):
+        def fechar(ev=None):
+            try:
+                self.app_page.close(dlg)
+            except Exception:
+                dlg.open = False
+                self.app_page.update()
+
+        dlg = ft.AlertDialog(
+            modal=True,
+            title=ft.Row(
+                controls=[
+                    ft.Icon(Icons.LOCAL_FIRE_DEPARTMENT, color=AppColors.PRIMARY_RUBI, size=24),
+                    ft.Text(evento.titulo, weight=ft.FontWeight.BOLD, size=FontScaleManager.s(16), color=AppColors.TEXT_WHITE, expand=True),
+                    ft.IconButton(icon=Icons.CLOSE, icon_color=AppColors.TEXT_MUTED, on_click=fechar),
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            ),
+            content=ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text(f"🔥 {evento.slogan}", size=FontScaleManager.s(13), weight=ft.FontWeight.BOLD, color=AppColors.SECONDARY_GOLD),
+                        ft.Container(height=4),
+                        ft.Text(evento.descricao, size=FontScaleManager.s(13), color=AppColors.TEXT_WHITE),
+                        ft.Divider(color=AppColors.DIVIDER, height=8),
+                        ft.Text(f"📅 Data: {evento.data_evento}", size=FontScaleManager.s(12), color=AppColors.TEXT_WHITE),
+                        ft.Text(f"📍 Local: {evento.local}", size=FontScaleManager.s(12), color=AppColors.TEXT_MUTED),
+                        ft.Text(f"💰 Investimento Inscrição: R$ {evento.valor_inscricao:.2f}", size=FontScaleManager.s(12), color=AppColors.SECONDARY_GOLD),
+                        ft.Text(f"👕 Camisa Oficial: R$ {evento.valor_camisa:.2f}", size=FontScaleManager.s(12), color=AppColors.TEXT_WHITE),
+                        ft.Container(height=6),
+                        ft.ElevatedButton(
+                            content=ft.Row(
+                                controls=[
+                                    ft.Icon(Icons.EDIT_DOCUMENT, color="#000000", size=16),
+                                    ft.Text("Fazer Inscrição no App", color="#000000", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(13)),
+                                ],
+                                spacing=6,
+                                alignment=ft.MainAxisAlignment.CENTER,
+                            ),
+                            style=ft.ButtonStyle(
+                                bgcolor=AppColors.SECONDARY_GOLD,
+                                shape=ft.RoundedRectangleBorder(radius=8),
+                                padding=AppPadding.all(12),
+                            ),
+                            on_click=lambda ev: (fechar(), InscricaoEventoModal.abrir(self.app_page, evento)),
+                        ),
+                        ft.ElevatedButton(
+                            content=ft.Row(
+                                controls=[
+                                    ft.Icon(Icons.CHAT, color="#FFFFFF", size=16),
+                                    ft.Text("Falar com a Secretaria no WhatsApp", color="#FFFFFF", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(12)),
+                                ],
+                                spacing=6,
+                                alignment=ft.MainAxisAlignment.CENTER,
+                            ),
+                            style=ft.ButtonStyle(
+                                bgcolor=AppColors.ACCENT_GREEN,
+                                shape=ft.RoundedRectangleBorder(radius=8),
+                                padding=AppPadding.all(12),
+                            ),
+                            on_click=lambda ev: ShareEngine.share_whatsapp_status(
+                                self.app_page,
+                                f"🔥 *Olá!* Gostaria de mais informações sobre o *{evento.titulo}* ({evento.slogan})!"
+                            ),
+                        ),
+                    ],
+                    spacing=6,
+                    scroll=ft.ScrollMode.AUTO,
+                ),
+                width=380,
+                height=420,
+            ),
+            bgcolor=AppColors.BG_SURFACE,
+        )
+        self.app_page.open(dlg)
+        self.app_page.update()

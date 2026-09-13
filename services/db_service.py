@@ -9,7 +9,7 @@ from typing import List, Dict, Any, Optional
 from core.config import DB_PATH
 from models.devocional import DevocionalDiario
 from models.oracao import PedidoOracao
-from models.midia import CultoAcervo, CorteVertical, FotoGaleria, FraseProfetica, LivroEbook, ModuloLideranca
+from models.midia import CultoAcervo, CorteVertical, FotoGaleria, FraseProfetica, LivroEbook, ModuloLideranca, EventoIgreja, ProdutoLoja, InscricaoEvento
 
 class DatabaseService:
     _instance = None
@@ -161,6 +161,60 @@ class DatabaseService:
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
             """)
+
+            # 10. Eventos & Avisos da Igreja
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS eventos_igreja (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                titulo TEXT NOT NULL,
+                slogan TEXT,
+                data_evento TEXT NOT NULL,
+                local TEXT NOT NULL,
+                descricao TEXT NOT NULL,
+                valor_inscricao REAL DEFAULT 0.0,
+                valor_camisa REAL DEFAULT 45.0,
+                whatsapp_contato TEXT DEFAULT '5521964314284',
+                imagem_url TEXT,
+                link_maps TEXT,
+                ativo INTEGER DEFAULT 1,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            """)
+
+            # 11. Produtos da Lojinha Oficial do Reino & Cantina
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS produtos_loja (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                categoria TEXT NOT NULL,
+                preco REAL NOT NULL,
+                descricao TEXT NOT NULL,
+                imagem_url TEXT NOT NULL,
+                tamanhos_disponiveis TEXT,
+                disponivel INTEGER DEFAULT 1,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            """)
+
+            # 12. Inscrições Nativas em Eventos (Salvas no App)
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS inscricoes_eventos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                evento_id INTEGER NOT NULL,
+                nome_completo TEXT NOT NULL,
+                whatsapp TEXT NOT NULL,
+                idade INTEGER NOT NULL,
+                bairro TEXT NOT NULL,
+                vinculo TEXT NOT NULL,
+                incluir_camisa INTEGER DEFAULT 0,
+                tamanho_camisa TEXT,
+                restricoes TEXT,
+                valor_total REAL NOT NULL,
+                status_pagamento TEXT DEFAULT 'pendente',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (evento_id) REFERENCES eventos_igreja(id)
+            )
+            """)
             conn.commit()
 
         # Alimenta dados iniciais se o banco estiver vazio
@@ -309,6 +363,52 @@ class DatabaseService:
                 VALUES (?, ?, ?, ?, ?, ?, ?)
                 """, cortes)
 
+            # Checa Eventos da Igreja
+            cursor.execute("SELECT COUNT(*) FROM eventos_igreja")
+            if cursor.fetchone()[0] == 0:
+                eventos = [
+                    (1, "Retiro Face a Face com Deus", "Um Encontro de Coração Ardente!", "20 a 22 de Outubro de 2026",
+                     "Rua Punta Del Este, 18, Campo Grande - RJ",
+                     "Três dias de imersão espiritual profunda, cura interior, quebra de maldições e renovo pentecostal. Venha viver um divisor de águas na sua história!",
+                     150.0, 45.0, "5521964314284",
+                     "https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/cortes/culto_001/cover_001_1.jpg",
+                     "https://maps.google.com/?q=Rua+Punta+Del+Este+18+Campo+Grande+RJ", 1)
+                ]
+                cursor.executemany("""
+                INSERT INTO eventos_igreja (id, titulo, slogan, data_evento, local, descricao, valor_inscricao, valor_camisa, whatsapp_contato, imagem_url, link_maps, ativo)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, eventos)
+
+            # Checa Produtos da Lojinha & Cantina
+            cursor.execute("SELECT COUNT(*) FROM produtos_loja")
+            if cursor.fetchone()[0] == 0:
+                produtos = [
+                    (1, "Camisa Oficial - Retiro Face a Face", "Vestuário", 45.00,
+                     "Camisa 100% algodão penteado premium com a estampa oficial do Retiro Face a Face com Deus.",
+                     "https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/cortes/culto_001/cover_001_2.jpg",
+                     "P, M, G, GG, XGG", 1),
+                    (2, "Quentinha Especial de Domingo (Cantina)", "Cantina", 25.00,
+                     "Almoço completo caseiro com churrasco misto, arroz, farofa e vinagrete. Retire na cantina após o culto!",
+                     "https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/cortes/culto_002/cover_002_1.jpg",
+                     None, 1),
+                    (3, "Kit 3 Livros Físicos do Pastor Anderson", "Livros", 60.00,
+                     "Os 3 livros oficiais impressos em capa luxo: Vitória na Família, Guerra Espiritual e Fundamentos da Fé.",
+                     "https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/cortes/culto_003/cover_003_1.jpg",
+                     None, 1),
+                    (4, "Caneca Porcelana Oficial IBPM CR", "Lembranças", 30.00,
+                     "Caneca resinada de alta durabilidade com o brasão oficial da Igreja Batista Pentecostal Mundial.",
+                     "https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/cortes/culto_004/cover_004_1.jpg",
+                     None, 1),
+                    (5, "Bolo & Refrigerante da Cantina", "Cantina", 12.00,
+                     "Fatia generosa de bolo confeitado artesanal acompanhado de refrigerante gelado.",
+                     "https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/cortes/culto_005/cover_005_1.jpg",
+                     None, 1)
+                ]
+                cursor.executemany("""
+                INSERT INTO produtos_loja (id, nome, categoria, preco, descricao, imagem_url, tamanhos_disponiveis, disponivel)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, produtos)
+
             conn.commit()
 
     # Métodos de Acesso
@@ -414,6 +514,77 @@ class DatabaseService:
                 ))
             return modulos
 
+    def get_eventos(self) -> List[EventoIgreja]:
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM eventos_igreja WHERE ativo = 1 ORDER BY id ASC")
+            rows = cursor.fetchall()
+            return [EventoIgreja(
+                id=r["id"], titulo=r["titulo"], slogan=r["slogan"] or "", data_evento=r["data_evento"],
+                local=r["local"], descricao=r["descricao"], valor_inscricao=r["valor_inscricao"] or 0.0,
+                valor_camisa=r["valor_camisa"] or 45.0, whatsapp_contato=r["whatsapp_contato"] or "5521964314284",
+                imagem_url=r["imagem_url"], link_maps=r["link_maps"], ativo=bool(r["ativo"])
+            ) for r in rows]
+
+    def get_evento_por_id(self, evento_id: int) -> Optional[EventoIgreja]:
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM eventos_igreja WHERE id = ? LIMIT 1", (evento_id,))
+            r = cursor.fetchone()
+            if r:
+                return EventoIgreja(
+                    id=r["id"], titulo=r["titulo"], slogan=r["slogan"] or "", data_evento=r["data_evento"],
+                    local=r["local"], descricao=r["descricao"], valor_inscricao=r["valor_inscricao"] or 0.0,
+                    valor_camisa=r["valor_camisa"] or 45.0, whatsapp_contato=r["whatsapp_contato"] or "5521964314284",
+                    imagem_url=r["imagem_url"], link_maps=r["link_maps"], ativo=bool(r["ativo"])
+                )
+            return None
+
+    def get_produtos_loja(self, categoria: Optional[str] = None) -> List[ProdutoLoja]:
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            if categoria and categoria != "Todos":
+                cursor.execute("SELECT * FROM produtos_loja WHERE categoria = ? AND disponivel = 1 ORDER BY id ASC", (categoria,))
+            else:
+                cursor.execute("SELECT * FROM produtos_loja WHERE disponivel = 1 ORDER BY id ASC")
+            rows = cursor.fetchall()
+            return [ProdutoLoja(
+                id=r["id"], nome=r["nome"], categoria=r["categoria"], preco=r["preco"],
+                descricao=r["descricao"], imagem_url=r["imagem_url"],
+                tamanhos_disponiveis=r["tamanhos_disponiveis"], disponivel=bool(r["disponivel"])
+            ) for r in rows]
+
+    def salvar_inscricao_evento(self, inscricao: InscricaoEvento) -> int:
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+            INSERT INTO inscricoes_eventos (
+                evento_id, nome_completo, whatsapp, idade, bairro, vinculo,
+                incluir_camisa, tamanho_camisa, restricoes, valor_total, status_pagamento
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                inscricao.evento_id, inscricao.nome_completo, inscricao.whatsapp,
+                inscricao.idade, inscricao.bairro, inscricao.vinculo,
+                1 if inscricao.incluir_camisa else 0, inscricao.tamanho_camisa,
+                inscricao.restricoes, inscricao.valor_total, inscricao.status_pagamento
+            ))
+            conn.commit()
+            return cursor.lastrowid
+
+    def get_inscricoes_evento(self, evento_id: int) -> List[InscricaoEvento]:
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM inscricoes_eventos WHERE evento_id = ? ORDER BY created_at DESC", (evento_id,))
+            rows = cursor.fetchall()
+            return [InscricaoEvento(
+                id=r["id"], evento_id=r["evento_id"], nome_completo=r["nome_completo"],
+                whatsapp=r["whatsapp"], idade=r["idade"], bairro=r["bairro"],
+                vinculo=r["vinculo"], incluir_camisa=bool(r["incluir_camisa"]),
+                tamanho_camisa=r["tamanho_camisa"], restricoes=r["restricoes"],
+                valor_total=r["valor_total"], status_pagamento=r["status_pagamento"],
+                data_inscricao=r["created_at"]
+            ) for r in rows]
+
     def seed_initial_data(self):
         return self._seed_initial_data()
 
@@ -473,5 +644,25 @@ class DBService:
     @classmethod
     def get_modulos_lideranca(cls):
         return cls._db.get_modulos_lideranca()
+
+    @classmethod
+    def get_eventos(cls):
+        return cls._db.get_eventos()
+
+    @classmethod
+    def get_evento_por_id(cls, evento_id: int):
+        return cls._db.get_evento_por_id(evento_id)
+
+    @classmethod
+    def get_produtos_loja(cls, categoria: Optional[str] = None):
+        return cls._db.get_produtos_loja(categoria)
+
+    @classmethod
+    def salvar_inscricao_evento(cls, inscricao: InscricaoEvento):
+        return cls._db.salvar_inscricao_evento(inscricao)
+
+    @classmethod
+    def get_inscricoes_evento(cls, evento_id: int):
+        return cls._db.get_inscricoes_evento(evento_id)
 
 

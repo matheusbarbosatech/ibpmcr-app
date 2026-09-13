@@ -64,3 +64,45 @@ class ModuloLideranca:
     conteudo_apostila: str
     pdf_apostila_url: Optional[str] = None
     questoes_quiz: Optional[List[Dict[str, Any]]] = None
+
+@dataclass
+class EventoIgreja:
+    id: int
+    titulo: str
+    slogan: str
+    data_evento: str
+    local: str
+    descricao: str
+    valor_inscricao: float = 0.0
+    valor_camisa: float = 45.0
+    whatsapp_contato: str = "5521964314284"
+    imagem_url: Optional[str] = None
+    link_maps: Optional[str] = None
+    ativo: bool = True
+
+@dataclass
+class ProdutoLoja:
+    id: int
+    nome: str
+    categoria: str  # Vestuario, Cantina, Livros, Lembrancas
+    preco: float
+    descricao: str
+    imagem_url: str
+    tamanhos_disponiveis: Optional[str] = None  # "P, M, G, GG, XGG" ou None
+    disponivel: bool = True
+
+@dataclass
+class InscricaoEvento:
+    id: Optional[int]
+    evento_id: int
+    nome_completo: str
+    whatsapp: str
+    idade: int
+    bairro: str
+    vinculo: str  # Membro IBPM / Visitante
+    incluir_camisa: bool
+    tamanho_camisa: Optional[str]
+    restricoes: Optional[str]
+    valor_total: float
+    status_pagamento: str = "pendente"  # pendente, pago
+    data_inscricao: Optional[str] = None

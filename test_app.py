@@ -218,8 +218,49 @@ def test_suite():
     assert fotos.active_subtab == 0
     print("  -> PalavraView (Devocional, Bíblia, Livros, Escola, Hinário) e FotosView (Galeria HD e Cortes) validadas.")
 
-    # 8. Orquestrador Geral main.py
-    print("\n[8/8] Testando Orquestrador Principal (main.py)...")
+    # 8. Eventos, Inscrições no App & Lojinha da Igreja
+    print("\n[8/9] Testando Eventos (Face a Face), Inscrição Nativa & Lojinha da Igreja...")
+    from models.midia import InscricaoEvento
+    from views.lojinha_view import LojinhaModal, InscricaoEventoModal, CompraProdutoModal
+    
+    eventos = DBService.get_eventos()
+    assert len(eventos) > 0, "Deveria haver eventos da igreja cadastrados"
+    evento_face = eventos[0]
+    assert "Face a Face" in evento_face.titulo
+    
+    produtos = DBService.get_produtos_loja()
+    assert len(produtos) > 0, "Deveria haver produtos na lojinha cadastrados"
+    
+    # Testa salvar inscrição direta pelo App
+    nova_inscricao = InscricaoEvento(
+        id=None,
+        evento_id=evento_face.id,
+        nome_completo="Membro Teste Automatizado",
+        whatsapp="21999998888",
+        idade=30,
+        bairro="Campo Grande",
+        vinculo="Membro IBPM CR",
+        incluir_camisa=True,
+        tamanho_camisa="G",
+        restricoes="Nenhuma",
+        valor_total=195.0,
+        status_pagamento="pendente"
+    )
+    inscricao_id = DBService.salvar_inscricao_evento(nova_inscricao)
+    assert inscricao_id > 0, "Inscrição direta no app deve retornar ID gerado"
+    
+    inscricoes_salvas = DBService.get_inscricoes_evento(evento_face.id)
+    assert len(inscricoes_salvas) > 0
+    assert inscricoes_salvas[0].nome_completo == "Membro Teste Automatizado"
+    
+    # Testa abertura de Modals
+    LojinhaModal.abrir(page)
+    InscricaoEventoModal.abrir(page, evento_face)
+    CompraProdutoModal.abrir(page, produtos[0])
+    print(f"  -> Eventos ({len(eventos)}), Inscrição Nativa (ID {inscricao_id}) e Lojinha ({len(produtos)} itens) validados com 100% de sucesso.")
+
+    # 9. Orquestrador Geral main.py
+    print("\n[9/9] Testando Orquestrador Principal (main.py)...")
     main_page = create_mock_page()
     main(main_page)
     assert main_page.title == "IBPM CR - Super-App Oficial"
