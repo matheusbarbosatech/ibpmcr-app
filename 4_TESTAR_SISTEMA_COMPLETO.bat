@@ -1,11 +1,11 @@
 @echo off
-chcp 65001 > nul
-title IBPM CR Super-App - Diagnostico e Testes
-cd /d "c:\Users\matheus\Desktop\ibpmcr-app"
+title IBPM CR - Diagnostico e Testes
+set PYTHON_EXE=C:\Users\matheus\AppData\Local\Programs\Python\Python311\python.exe
+set PATH=C:\Users\matheus\AppData\Local\Programs\Python\Python311;C:\Users\matheus\AppData\Local\Programs\Python\Python311\Scripts;%PATH%
+cd /d C:\Users\matheus\Desktop\ibpmcr-app
 echo =================================================================
-echo 🧪 EXECUTANDO DIAGNÓSTICO E BATERIA DE TESTES AUTOMATIZADOS...
+echo EXECUTANDO BATERIA DE TESTES AUTOMATIZADOS...
 echo =================================================================
-echo.
-python test_app.py
-echo.
+"%PYTHON_EXE%" test_app.py
+echo =================================================================
 pause

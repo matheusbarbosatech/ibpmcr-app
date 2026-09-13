@@ -35,11 +35,14 @@ def main(page: ft.Page):
     # 1. Configurações Globais da Janela e Tema
     page.title = "IBPM CR - Super-App Oficial"
     page.theme_mode = ft.ThemeMode.DARK
-    page.window.width = 420
-    page.window.height = 890
-    page.window.min_width = 360
-    page.window.min_height = 700
-    page.window.resizable = True
+    try:
+        page.window.width = 420
+        page.window.height = 890
+        page.window.min_width = 360
+        page.window.min_height = 700
+        page.window.resizable = True
+    except Exception:
+        pass
     page.padding = 0
     page.bgcolor = AppColors.BG_DARK
 
@@ -279,4 +282,4 @@ def main(page: ft.Page):
 
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main=main)

@@ -1,15 +1,13 @@
 @echo off
-chcp 65001 > nul
-title IBPM CR Super-App - Hot Reload (Atualizacao em Tempo Real)
-cd /d "c:\Users\matheus\Desktop\ibpmcr-app"
+title IBPM CR - Hot Reload (Atualizacao em Tempo Real)
+set PYTHON_EXE=C:\Users\matheus\AppData\Local\Programs\Python\Python311\python.exe
+set PATH=C:\Users\matheus\AppData\Local\Programs\Python\Python311;C:\Users\matheus\AppData\Local\Programs\Python\Python311\Scripts;%PATH%
+cd /d C:\Users\matheus\Desktop\ibpmcr-app
 echo =================================================================
-echo 🔥 INICIANDO COM HOT-RELOAD (ATUALIZAÇÃO EM TEMPO REAL)
+echo INICIANDO COM HOT-RELOAD (ATUALIZACAO EM TEMPO REAL)
 echo =================================================================
-echo Toda alteração no código atualiza a tela automaticamente!
-echo.
-flet run main.py -r
-if %errorlevel% neq 0 (
-    echo.
-    echo ❌ Flet runner encerrou.
-    pause
-)
+"C:\Users\matheus\AppData\Local\Programs\Python\Python311\Scripts\flet.exe" run main.py -r
+echo =================================================================
+echo Flet Hot Reload finalizado.
+echo =================================================================
+pause

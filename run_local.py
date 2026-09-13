@@ -63,7 +63,7 @@ def main():
         print(f"\n👉 O navegador abrirá automaticamente em: http://localhost:{port}")
         print("💡 Dica: Pressione F12 no Chrome/Edge e ative a visão 'Mobile' para ver como celular!\n")
         try:
-            ft.app(target=app_main, view=ft.AppView.WEB_BROWSER, port=port)
+            ft.run(main=app_main, view=ft.AppView.WEB_BROWSER, port=port)
         except Exception as e:
             log_msg(f"❌ Erro na execução Web: {e}\n{traceback.format_exc()}")
     else:
@@ -71,9 +71,13 @@ def main():
         print("\n👉 A janela do aplicativo abrirá na sua tela em instantes.")
         print("💡 Você pode interagir com o mouse como se estivesse no celular.\n")
         try:
-            ft.app(target=app_main, view=ft.AppView.FLET_APP)
+            ft.run(main=app_main, view=ft.AppView.FLET_APP)
         except Exception as e:
-            log_msg(f"❌ Erro na execução Desktop: {e}\n{traceback.format_exc()}")
+            log_msg(f"⚠️ Cliente Desktop indisponível ({e}). Iniciando automaticamente no navegador...")
+            try:
+                ft.run(main=app_main, view=ft.AppView.WEB_BROWSER, port=8550)
+            except Exception as err_web:
+                log_msg(f"❌ Erro na execução: {err_web}\n{traceback.format_exc()}")
 
 if __name__ == "__main__":
     try:

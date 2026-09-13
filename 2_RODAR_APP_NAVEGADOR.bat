@@ -1,14 +1,13 @@
 @echo off
-chcp 65001 > nul
-title IBPM CR Super-App - Teste no Navegador Web
-cd /d "c:\Users\matheus\Desktop\ibpmcr-app"
+title IBPM CR - Teste no Navegador Web
+set PYTHON_EXE=C:\Users\matheus\AppData\Local\Programs\Python\Python311\python.exe
+set PATH=C:\Users\matheus\AppData\Local\Programs\Python\Python311;C:\Users\matheus\AppData\Local\Programs\Python\Python311\Scripts;%PATH%
+cd /d C:\Users\matheus\Desktop\ibpmcr-app
 echo =================================================================
-echo 🌐 ABRINDO O SUPER-APP OFICIAL IBPM CR NO NAVEGADOR (CHROME/EDGE)...
+echo ABRINDO SUPER-APP OFICIAL IBPM CR NO NAVEGADOR (CHROME/EDGE)...
 echo =================================================================
-echo.
-python run_local.py web
-if %errorlevel% neq 0 (
-    echo.
-    echo ❌ Ocorreu um erro ao rodar o aplicativo no navegador.
-    pause
-)
+"%PYTHON_EXE%" run_local.py web
+echo =================================================================
+echo Servidor Web encerrado.
+echo =================================================================
+pause

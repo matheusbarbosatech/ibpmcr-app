@@ -1,14 +1,13 @@
 @echo off
-chcp 65001 > nul
-title IBPM CR Super-App - Teste Local Desktop
-cd /d "c:\Users\matheus\Desktop\ibpmcr-app"
+title IBPM CR - Teste Local Desktop
+set PYTHON_EXE=C:\Users\matheus\AppData\Local\Programs\Python\Python311\python.exe
+set PATH=C:\Users\matheus\AppData\Local\Programs\Python\Python311;C:\Users\matheus\AppData\Local\Programs\Python\Python311\Scripts;%PATH%
+cd /d C:\Users\matheus\Desktop\ibpmcr-app
 echo =================================================================
-echo 📱 ABRINDO O SUPER-APP OFICIAL IBPM CR NO SEU PC...
+echo ABRINDO SUPER-APP OFICIAL IBPM CR NO SEU COMPUTADOR...
 echo =================================================================
-echo.
-python run_local.py desktop
-if %errorlevel% neq 0 (
-    echo.
-    echo ❌ Ocorreu um erro ao rodar o aplicativo.
-    pause
-)
+"%PYTHON_EXE%" run_local.py desktop
+echo =================================================================
+echo Aplicativo finalizado.
+echo =================================================================
+pause
