@@ -437,10 +437,13 @@ class HomeView(ft.Container):
         ShareEngine.copy_to_clipboard(self.app_page, f"{self.frase_text.value} - {self.frase_ref.value}", "Frase copiada!")
 
     def tocar_pilula_pastoral(self, e):
+        dev = self.db.get_devocional_hoje(1)
+        audio_url = (dev.audio_url if dev and dev.audio_url else None) or "https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/audios/devocionais/devocional_001.mp3"
+        titulo = f"Pílula Pastoral - {dev.titulo}" if dev else "Pílula Pastoral - Uma Palavra de Ânimo"
         track = AudioTrack(
-            title="Pílula Pastoral - Uma Palavra de Ânimo",
+            title=titulo,
             subtitle="Pastor Presidente • IBPM CR",
-            audio_url="https://midia.ibpmcr.com.br/audios/pilula_pastoral_hoje.mp3"
+            audio_url=audio_url
         )
         self.audio_service.play_track(track)
         self.audio_status_text.value = "▶️ Tocando em segundo plano..."

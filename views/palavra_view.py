@@ -243,10 +243,31 @@ class PalavraView(ft.Container):
         track = AudioTrack(
             title=f"Devocional {dev.dia_ano}: {dev.titulo}",
             subtitle=f"{dev.versiculo_chave} • IBPM CR",
-            audio_url=dev.audio_url or "https://midia.ibpmcr.com.br/audios/devocional_01.mp3"
+            audio_url=dev.audio_url or f"https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/audios/devocionais/devocional_{dev.dia_ano:03d}.mp3"
         )
         self.audio_service.play_track(track)
         ShareEngine.show_feedback(self.app_page, "🎧 Reproduzindo ministração devocional! Pode bloquear a tela que o áudio continuará.")
+
+    def ouvir_audiobook(self, livro):
+        slug = "vitoria_familia" if livro.id == 1 else "guerra_espiritual" if livro.id == 2 else "fundamentos_fe"
+        audio_url = f"https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/audios/livros/audiobook_{slug}.mp3"
+        track = AudioTrack(
+            title=f"Audiobook: {livro.titulo_livro}",
+            subtitle=f"{livro.subtitulo} • IBPM CR",
+            audio_url=audio_url,
+        )
+        self.audio_service.play_track(track)
+        ShareEngine.show_feedback(self.app_page, f"🎧 Reproduzindo Audiobook: {livro.titulo_livro}! Áudio em segundo plano ativo.")
+
+    def ouvir_modulo_audio(self, modulo):
+        audio_url = f"https://pub-2b0c315d91644a41b558a4d2410ce1f8.r2.dev/audios/escola_lideres/modulo_{modulo.numero_modulo:02d}.mp3"
+        track = AudioTrack(
+            title=f"Módulo {modulo.numero_modulo}: {modulo.titulo_modulo}",
+            subtitle=f"Escola de Líderes • IBPM CR",
+            audio_url=audio_url,
+        )
+        self.audio_service.play_track(track)
+        ShareEngine.show_feedback(self.app_page, f"🎧 Reproduzindo áudio da lição do Módulo {modulo.numero_modulo}!")
 
     def compartilhar_devocional_whatsapp(self, dev):
         mensagem = (
@@ -372,30 +393,45 @@ class PalavraView(ft.Container):
                                 ft.ElevatedButton(
                                     content=ft.Row(
                                         controls=[
-                                            ft.Icon(Icons.DOWNLOAD, color="#FFFFFF", size=18),
-                                            ft.Text("Baixar Livro (PDF)", color="#FFFFFF", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(12)),
+                                            ft.Icon(Icons.HEADPHONES, color="#000000", size=16),
+                                            ft.Text("Audiobook", color="#000000", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(11)),
                                         ],
-                                        spacing=6,
+                                        spacing=4,
+                                    ),
+                                    style=ft.ButtonStyle(
+                                        bgcolor=AppColors.SECONDARY_GOLD,
+                                        shape=ft.RoundedRectangleBorder(radius=8),
+                                        padding=AppPadding.symmetric(horizontal=10, vertical=10),
+                                    ),
+                                    on_click=lambda e, l=liv: self.ouvir_audiobook(l),
+                                ),
+                                ft.ElevatedButton(
+                                    content=ft.Row(
+                                        controls=[
+                                            ft.Icon(Icons.DOWNLOAD, color="#FFFFFF", size=16),
+                                            ft.Text("PDF", color="#FFFFFF", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(11)),
+                                        ],
+                                        spacing=4,
                                     ),
                                     style=ft.ButtonStyle(
                                         bgcolor=AppColors.PRIMARY_RUBI,
                                         shape=ft.RoundedRectangleBorder(radius=8),
-                                        padding=AppPadding.symmetric(horizontal=12, vertical=10),
+                                        padding=AppPadding.symmetric(horizontal=10, vertical=10),
                                     ),
                                     on_click=lambda e, l=liv: ShareEngine.download_to_device(self.app_page, l.pdf_url, f"{l.titulo_livro}.pdf"),
                                 ),
                                 ft.OutlinedButton(
                                     content=ft.Row(
                                         controls=[
-                                            ft.Icon(Icons.SHARE, color=AppColors.SECONDARY_GOLD, size=18),
-                                            ft.Text("Compartilhar", color=AppColors.SECONDARY_GOLD, weight=ft.FontWeight.BOLD, size=FontScaleManager.s(12)),
+                                            ft.Icon(Icons.SHARE, color=AppColors.SECONDARY_GOLD, size=16),
+                                            ft.Text("Compartilhar", color=AppColors.SECONDARY_GOLD, weight=ft.FontWeight.BOLD, size=FontScaleManager.s(11)),
                                         ],
-                                        spacing=6,
+                                        spacing=4,
                                     ),
                                     style=ft.ButtonStyle(
                                         side=ft.BorderSide(1, AppColors.SECONDARY_GOLD),
                                         shape=ft.RoundedRectangleBorder(radius=8),
-                                        padding=AppPadding.symmetric(horizontal=12, vertical=10),
+                                        padding=AppPadding.symmetric(horizontal=10, vertical=10),
                                     ),
                                     on_click=lambda e, l=liv: ShareEngine.share_whatsapp_status(
                                         self.app_page,
@@ -465,9 +501,29 @@ class PalavraView(ft.Container):
                         ft.Row(
                             controls=[
                                 ft.ElevatedButton(
-                                    "Fazer Quiz do Módulo",
+                                    content=ft.Row(
+                                        controls=[
+                                            ft.Icon(Icons.HEADPHONES, color="#000000", size=16),
+                                            ft.Text("Ouvir Lição", color="#000000", weight=ft.FontWeight.BOLD, size=FontScaleManager.s(11)),
+                                        ],
+                                        spacing=4,
+                                    ),
+                                    style=ft.ButtonStyle(
+                                        bgcolor=AppColors.SECONDARY_GOLD,
+                                        shape=ft.RoundedRectangleBorder(radius=8),
+                                        padding=AppPadding.symmetric(horizontal=8, vertical=8),
+                                    ),
+                                    on_click=lambda e, mod=m: self.ouvir_modulo_audio(mod),
+                                ),
+                                ft.ElevatedButton(
+                                    "Quiz",
                                     icon=Icons.CHECK_CIRCLE_OUTLINE,
-                                    style=ft.ButtonStyle(bgcolor=AppColors.BG_SURFACE_ALT, color=AppColors.SECONDARY_GOLD),
+                                    style=ft.ButtonStyle(
+                                        bgcolor=AppColors.BG_SURFACE_ALT,
+                                        color=AppColors.SECONDARY_GOLD,
+                                        shape=ft.RoundedRectangleBorder(radius=8),
+                                        padding=AppPadding.symmetric(horizontal=8, vertical=8),
+                                    ),
                                     on_click=lambda e, mod=m: self.iniciar_quiz_modal(mod),
                                 ),
                                 ft.TextButton(

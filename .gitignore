@@ -26,6 +26,8 @@ scratch_*.py
 test_sonnet_raw.py
 *.tmp
 data/r2_cortes_manifest.json
+data/audios/
+*.mp3
 
 # Sistema Operacional
 .DS_Store
