@@ -68,10 +68,9 @@
 
 | # | Prioridade | Tarefa | Módulo Envolvido | Tempo Estimado |
 |---|---|---|---|---|
-| **1** | 🟡 **MÉDIA** | [**📸 Obter e Sincronizar Link do Drive de Fotos dos Cultos**](#-tarefa-1-obter-e-sincronizar-link-do-drive-de-fotos-dos-cultos) | Mídia / Fotos | 10 min |
+| **1** | 🟡 **MÉDIA** | [**📸 Baixar & Ingerir Fotos/Carrosséis do Instagram Oficial**](#-tarefa-1-baixar--ingerir-fotoscarrosséis-do-instagram-oficial) | Mídia / Fotos | 5 min |
 | **2** | 🟡 **MÉDIA** | [**🎮 Implementar Módulo de Mini-Jogos Bíblicos**](#-tarefa-2-implementar-módulo-de-mini-jogos-bíblicos) | Telas / Jogos | 1 dia |
-| **3** | 🟢 **BAIXA** | [**Popular Galeria com Álbuns Oficiais do Instagram**](#-tarefa-3-popular-galeria-com-álbuns-oficiais-do-instagram) | Banco de Dados | 5 min |
-| **4** | 🟢 **BAIXA** | [**Configurar Streaming Oficial da Web Rádio (Zeno.fm - Opcional)**](#-tarefa-4-configurar-streaming-oficial-da-web-rádio-zenofm) | Áudio / Rádio | 10 min |
+| **3** | 🟢 **BAIXA** | [**Configurar Streaming Oficial da Web Rádio (Zeno.fm - Opcional)**](#-tarefa-3-configurar-streaming-oficial-da-web-rádio-zenofm) | Áudio / Rádio | 10 min |
 
 ---
 
@@ -79,20 +78,18 @@
 
 ---
 
-### 🟡 Tarefa 1: Obter e Sincronizar Link do Drive de Fotos dos Cultos
-* **Objetivo:** Conectar a pasta compartilhada da equipe de mídia da igreja para atualizar a galeria com fotos dos cultos recentes.
-* **Passo a Passo:**
-  1. Obter o link da pasta compartilhada do Google Drive da equipe de mídia.
-  2. Garantir que o link tenha permissão de leitura pública.
-  3. Rodar o script de sincronização:
-     ```powershell
-     python scripts/sync_google_drive_photos.py --drive-url "https://drive.google.com/drive/folders/SEU_ID_AQUI"
-     ```
+### 🟡 Tarefa 1: Baixar & Ingerir Fotos/Carrosséis do Instagram Oficial
+* **Objetivo:** Baixar fotos estáticas, carrosséis de cultos, capas e vídeos do Instagram da igreja (`@ibpmcarvalhoramos`), organizando tudo em álbuns temáticos no app (Festividades, IBPM Kids, Semear, Cultos, Santa Ceia).
+* **Script Automatizado:** [scripts/download_instagram_media.py](file:///c:/Users/matheus/Desktop/ibpmcr-app/scripts/download_instagram_media.py)
+* **Como Executar:**
+  ```powershell
+  python scripts/download_instagram_media.py --user ibpmcarvalhoramos --posts 50
+  ```
 
 ---
 
 ### 🟡 Tarefa 2: Implementar Módulo de Mini-Jogos Bíblicos
-* **Objetivo:** Desenvolver a **6ª Sub-Aba de Palavra & Estudos** com jogos cristãos baseados no relatório [docs/RELATORIO_JOGOS_BIBLICOS.md](file:///c:/Users/matheus/Desktop/ibpmcr-app/docs/RELATORIO_JOGOS_BIBLICOS.md).
+* **Objetivo:** Desenvolver a **6ª Sub-Aba de Palavra & Estudos** com jogos cristãos pedagógicos baseados no relatório [docs/RELATORIO_JOGOS_BIBLICOS.md](file:///c:/Users/matheus/Desktop/ibpmcr-app/docs/RELATORIO_JOGOS_BIBLICOS.md).
 * **Mini-Jogos Previstos:**
   1. 🟩 **Palavra Bíblica do Dia (Wordle / Termo):** Adivinhar palavra bíblica em 6 tentativas com feedback por cores e versículo pós-vitória.
   2. 🏆 **Show da Fé (Quiz Bíblico):** Perguntas com 3 níveis (Iniciante, Valente e Mestre) com ajudas `50:50` e `Dica do Pastor`.
@@ -102,16 +99,7 @@
 
 ---
 
-### 🟢 Tarefa 3: Popular Galeria com Álbuns Oficiais do Instagram
-* **Objetivo:** Popular a galeria com acervo de fotos do Instagram oficial `@ibpmcarvalhoramos`.
-* **Comando:**
-  ```powershell
-  python scripts/seed_albuns_oficiais.py
-  ```
-
----
-
-### 🟢 Tarefa 4: Configurar Streaming Oficial da Web Rádio (Zeno.fm)
+### 🟢 Tarefa 3: Configurar Streaming Oficial da Web Rádio (Zeno.fm)
 * **Objetivo:** Customizar a grade 24h da rádio com louvores pentecostais e pregações do Pastor Anderson.
 * **Passo a Passo:**
   1. Criar conta gratuita no [Zeno.fm](https://zeno.fm).
