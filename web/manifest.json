@@ -1,0 +1,71 @@
+{
+  "name": "IBPM CR - Super-App Oficial",
+  "short_name": "IBPM CR",
+  "description": "Super-App Oficial da Igreja Batista Pentecostal Mundial da Carvalho Ramos. Cultos ao vivo, oração, devocionais 365, rádio 24h e escola de líderes.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#07090E",
+  "theme_color": "#07090E",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["lifestyle", "social", "books", "music"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mural de Oração",
+      "short_name": "Oração",
+      "description": "Coloque seu pedido no altar e ore pelos irmãos",
+      "url": "./index.html?tab=1",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Devocional 365",
+      "short_name": "Devocional",
+      "description": "Alimento diário da Palavra com áudio e reflexão",
+      "url": "./index.html?tab=2",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Rádio IBPM CR 24h",
+      "short_name": "Rádio",
+      "description": "Louvores e pregações ao vivo 24 horas",
+      "url": "./index.html?action=radio",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Dízimos e Ofertas",
+      "short_name": "Dízimos",
+      "description": "Chave PIX oficial e comprovante WhatsApp",
+      "url": "./index.html?action=pix",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

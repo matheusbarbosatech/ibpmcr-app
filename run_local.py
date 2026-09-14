@@ -57,13 +57,14 @@ def main():
 
     modo = sys.argv[1].lower() if len(sys.argv) > 1 else "desktop"
 
-    if modo in ["web", "--web", "-w"]:
-        port = 8550
-        log_msg(f"🌐 Iniciando no Modo Navegador Web em http://localhost:{port} ...")
-        print(f"\n👉 O navegador abrirá automaticamente em: http://localhost:{port}")
-        print("💡 Dica: Pressione F12 no Chrome/Edge e ative a visão 'Mobile' para ver como celular!\n")
+    if modo in ["web", "--web", "-w"] or os.environ.get("RENDER") or os.environ.get("PORT"):
+        port = int(os.environ.get("PORT", 8550))
+        host = os.environ.get("HOST", "0.0.0.0")
+        log_msg(f"🌐 Iniciando no Modo Navegador Web em http://{host}:{port} ...")
+        print(f"\n👉 Servidor Web rodando em: http://{host}:{port}")
+        print("💡 PWA Oficial IBPM CR ativo com suporte a instalação mobile!\n")
         try:
-            ft.run(main=app_main, view=ft.AppView.WEB_BROWSER, port=port)
+            ft.run(main=app_main, view=ft.AppView.WEB_BROWSER, host=host, port=port, assets_dir=str(ROOT_DIR / "assets"))
         except Exception as e:
             log_msg(f"❌ Erro na execução Web: {e}\n{traceback.format_exc()}")
     else:
@@ -71,11 +72,11 @@ def main():
         print("\n👉 A janela do aplicativo abrirá na sua tela em instantes.")
         print("💡 Você pode interagir com o mouse como se estivesse no celular.\n")
         try:
-            ft.run(main=app_main, view=ft.AppView.FLET_APP)
+            ft.run(main=app_main, view=ft.AppView.FLET_APP, assets_dir=str(ROOT_DIR / "assets"))
         except Exception as e:
             log_msg(f"⚠️ Cliente Desktop indisponível ({e}). Iniciando automaticamente no navegador...")
             try:
-                ft.run(main=app_main, view=ft.AppView.WEB_BROWSER, port=8550)
+                ft.run(main=app_main, view=ft.AppView.WEB_BROWSER, port=8550, assets_dir=str(ROOT_DIR / "assets"))
             except Exception as err_web:
                 log_msg(f"❌ Erro na execução: {err_web}\n{traceback.format_exc()}")
 

@@ -1,0 +1,762 @@
+/**
+ * Componentes de Interface - IBPM CR WebApp PWA
+ * Cards, Banners, Mini-Player, Modais, Carrosséis, Formulários e Animações.
+ */
+
+/* ==========================================================================
+   1. CARDS & SUPERFÍCIES
+   ========================================================================== */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card-gold {
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.card-rubi {
+  border-color: var(--border-rubi);
+  box-shadow: var(--shadow-glow-rubi);
+}
+
+/* ==========================================================================
+   2. BANNERS (AO VIVO & RETIRO)
+   ========================================================================== */
+.banner-live {
+  background: linear-gradient(145deg, #1C2233 0%, #131722 100%);
+  border: 1.5px solid var(--primary-rubi);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #380D17;
+  border: 1px solid var(--primary-rubi);
+  color: var(--text-white);
+  font-size: calc(11px * var(--font-scale));
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-rubi);
+  border-radius: 50%;
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 8px var(--primary-rubi); }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.badge-gold {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--secondary-gold);
+  color: var(--gold-light);
+  font-size: calc(10px * var(--font-scale));
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.banner-title {
+  font-size: calc(17px * var(--font-scale));
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.25;
+}
+
+.banner-subtitle {
+  font-size: calc(13px * var(--font-scale));
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   3. BOTÕES MODERNOS & ACESSÍVEIS (Min 48dp)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: calc(13px * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary-rubi {
+  background-color: var(--primary-rubi);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px var(--primary-rubi-glow);
+}
+
+.btn-primary-rubi:hover {
+  background-color: var(--primary-rubi-dark);
+}
+
+.btn-secondary-gold {
+  background-color: var(--secondary-gold);
+  color: #000000;
+  box-shadow: 0 4px 14px var(--gold-glow);
+}
+
+.btn-secondary-gold:hover {
+  background-color: var(--gold-light);
+}
+
+.btn-green-whatsapp {
+  background-color: var(--accent-green);
+  color: #FFFFFF;
+}
+
+.btn-green-whatsapp:hover {
+  background-color: var(--accent-green-dark);
+}
+
+.btn-outlined-gold {
+  background: transparent;
+  border: 1px solid var(--secondary-gold);
+  color: var(--secondary-gold);
+}
+
+.btn-outlined-gold:hover {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.btn-outlined-rubi {
+  background: transparent;
+  border: 1px solid var(--primary-rubi);
+  color: var(--primary-rubi);
+}
+
+.btn-outlined-rubi:hover {
+  background: rgba(225, 29, 72, 0.1);
+}
+
+.btn-icon-round {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ==========================================================================
+   4. PLAYER & RÁDIO CARDS
+   ========================================================================== */
+.card-media-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-media-row:hover {
+  border-color: var(--border-gold);
+}
+
+.media-play-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease;
+}
+
+.media-play-btn:active {
+  transform: scale(0.9);
+}
+
+.media-play-btn.gold {
+  background-color: var(--secondary-gold);
+  color: #000000;
+}
+
+.media-play-btn.rubi {
+  background-color: var(--primary-rubi);
+  color: #FFFFFF;
+}
+
+.media-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.media-info-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.media-title {
+  font-size: calc(14px * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.media-subtitle {
+  font-size: calc(12px * var(--font-scale));
+  color: var(--secondary-gold);
+  font-weight: 500;
+}
+
+.media-status {
+  font-size: calc(11px * var(--font-scale));
+  color: var(--text-muted);
+}
+
+/* Equalizador de Áudio Animado */
+.audio-equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.eq-bar {
+  width: 3px;
+  background-color: var(--secondary-gold);
+  border-radius: 2px;
+  animation: eqAnim 1s ease-in-out infinite alternate;
+}
+
+.eq-bar:nth-child(1) { height: 4px; animation-delay: 0.1s; }
+.eq-bar:nth-child(2) { height: 12px; animation-delay: 0.3s; }
+.eq-bar:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+.eq-bar:nth-child(4) { height: 14px; animation-delay: 0.4s; }
+
+@keyframes eqAnim {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+/* ==========================================================================
+   5. CARROSSEL DE SENTIMENTOS & FRASE PROFÉTICA
+   ========================================================================== */
+.chips-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.chips-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.chip-btn {
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.chip-btn.active {
+  background: var(--primary-rubi);
+  border-color: var(--primary-rubi);
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px var(--primary-rubi-glow);
+}
+
+.prophetic-card {
+  background: var(--bg-dark);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 18px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prophetic-text {
+  font-size: calc(15px * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.prophetic-ref {
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 700;
+  color: var(--secondary-gold);
+}
+
+/* ==========================================================================
+   6. GRID DE ATALHOS RÁPIDOS SÊNIOR (Área de toque >= 48dp)
+   ========================================================================== */
+.shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.shortcut-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 12px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  min-height: 96px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: 1px solid var(--border-default);
+}
+
+.shortcut-card:hover {
+  outline-color: var(--secondary-gold);
+  transform: translateY(-2px);
+}
+
+.shortcut-card:active {
+  transform: scale(0.95);
+}
+
+.shortcut-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.shortcut-title {
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1.1;
+}
+
+.shortcut-desc {
+  font-size: calc(10px * var(--font-scale));
+  color: var(--text-muted);
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   7. SUB-ABAS PILLS (Palavra & Mídia)
+   ========================================================================== */
+.subtabs-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0 10px 0;
+  scrollbar-width: none;
+}
+
+.subtabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.subtab-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.subtab-pill.active {
+  background: var(--primary-rubi);
+  border-color: var(--primary-rubi);
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px var(--primary-rubi-glow);
+}
+
+/* ==========================================================================
+   8. PEDIDOS DE ORAÇÃO & MURAL SOCIAL
+   ========================================================================== */
+.prayer-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.prayer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.prayer-user {
+  font-size: calc(14px * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.prayer-badge {
+  background: var(--bg-dark);
+  border: 1px solid var(--secondary-gold);
+  color: var(--secondary-gold);
+  font-size: calc(11px * var(--font-scale));
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+.prayer-details {
+  font-size: calc(13px * var(--font-scale));
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.prayer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--divider);
+  padding-top: 10px;
+}
+
+.btn-orando {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(225, 29, 72, 0.12);
+  border: 1px solid var(--primary-rubi);
+  color: var(--primary-rubi);
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-orando:hover, .btn-orando.active {
+  background: var(--primary-rubi);
+  color: #FFFFFF;
+}
+
+.btn-orando:active {
+  transform: scale(0.92);
+}
+
+/* ==========================================================================
+   9. MINI-PLAYER PERSISTENTE (ÁUDIO FLUTUANTE)
+   ========================================================================== */
+.floating-mini-player {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height) + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 20px);
+  max-width: calc(var(--max-app-width) - 20px);
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-rubi);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 85;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.mini-player-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-gold);
+  flex-shrink: 0;
+}
+
+.mini-player-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-player-title {
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-sub {
+  font-size: calc(10px * var(--font-scale));
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   10. MODAIS & SHEETS NATIVOS
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 440px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-md);
+  transform: translateY(20px);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 10px;
+}
+
+.modal-title {
+  font-size: calc(16px * var(--font-scale));
+  font-weight: 800;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-white);
+}
+
+/* Formulários dos Modais */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.form-input, .form-select, .form-textarea {
+  background: var(--bg-dark);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  color: var(--text-white);
+  font-family: inherit;
+  font-size: calc(13px * var(--font-scale));
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--secondary-gold);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ==========================================================================
+   11. BANNER DE INSTALAÇÃO PWA
+   ========================================================================== */
+.pwa-install-banner {
+  background: linear-gradient(135deg, #1C2233 0%, #2A1820 100%);
+  border: 1px solid var(--primary-rubi);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: var(--shadow-glow-rubi);
+  animation: fadeIn 0.3s ease;
+}
+
+.pwa-install-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pwa-install-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--primary-rubi);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.pwa-install-text {
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.pwa-install-sub {
+  font-size: calc(10px * var(--font-scale));
+  color: var(--text-muted);
+}

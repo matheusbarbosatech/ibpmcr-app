@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ibpmcr-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run_local.py web
+    envVars:
+      - key: PORT
+        value: 8550
+      - key: PYTHON_VERSION
+        value: 3.11.8

@@ -1,0 +1,325 @@
+/**
+ * Design System Oficial 'Coração Ardente' - IBPM CR WebApp PWA
+ * WCAG AAA Compliance, Glassmorphism, Senior Scaling & Smooth Animations.
+ */
+
+:root {
+  /* Cores Oficiais da Igreja */
+  --bg-dark: #07090E;
+  --bg-surface: #131722;
+  --bg-surface-alt: #1C2233;
+  --bg-surface-glass: rgba(19, 23, 34, 0.85);
+  --bg-card: rgba(28, 34, 51, 0.6);
+  --bg-selected: #2A1820;
+
+  /* Rubi Pentecostal & Ouro Imperial */
+  --primary-rubi: #E11D48;
+  --primary-rubi-dark: #BE123C;
+  --primary-rubi-glow: rgba(225, 29, 72, 0.35);
+  --secondary-gold: #F59E0B;
+  --gold-light: #FCD34D;
+  --gold-glow: rgba(245, 158, 11, 0.25);
+
+  /* Acentos de Sucesso e Info */
+  --accent-green: #10B981;
+  --accent-green-dark: #059669;
+  --accent-blue: #38BDF8;
+  --danger: #EF4444;
+
+  /* Textos de Alto Contraste (WCAG AAA) */
+  --text-white: #FFFFFF;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  /* Bordas e Divisores */
+  --border-default: #222B3D;
+  --border-gold: #F59E0B;
+  --border-rubi: #E11D48;
+  --divider: #1B2232;
+
+  /* Sombras e Elevação */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.6);
+  --shadow-glow-rubi: 0 0 24px rgba(225, 29, 72, 0.3);
+  --shadow-glow-gold: 0 0 24px rgba(245, 158, 11, 0.25);
+
+  /* Sistema de Acessibilidade Sênior (Fator Multiplicador) */
+  --font-scale: 1.0;
+
+  /* Raios de Borda */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Alturas de Estrutura */
+  --header-height: 64px;
+  --bottom-nav-height: 68px;
+  --max-app-width: 480px;
+}
+
+/* Reset Global */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background-color: #030407;
+  color: var(--text-white);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  height: 100%;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+body {
+  min-height: 100%;
+  background-color: #030407;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: var(--text-white);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Container do App com Mockup Responsivo */
+#app-root {
+  width: 100%;
+  max-width: var(--max-app-width);
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  padding-bottom: calc(var(--bottom-nav-height) + 20px);
+}
+
+/* Suporte para Safe Area no iOS */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  #app-root {
+    padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 20px);
+  }
+}
+
+/* Top App Bar com Branding Oficial */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-height);
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1C2233 0%, #07090E 100%);
+  border: 1px solid var(--primary-rubi);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glow-rubi);
+}
+
+.header-logo-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--primary-rubi);
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  font-size: calc(14px * var(--font-scale));
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--text-white);
+  line-height: 1.2;
+}
+
+.header-subtitle {
+  font-size: calc(11px * var(--font-scale));
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.1;
+}
+
+/* Controle de Acessibilidade Sênior (A- / A+) */
+.font-scaler-control {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-surface-alt);
+  padding: 3px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-default);
+}
+
+.btn-scale {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-scale:active {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(0.92);
+}
+
+.btn-scale-plus {
+  color: var(--secondary-gold);
+}
+
+.scale-value-display {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gold-light);
+  min-width: 34px;
+  text-align: center;
+}
+
+/* Área de Conteúdo Principal */
+.view-container {
+  flex: 1;
+  padding: 14px 14px 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom Navigation Bar Material 3 */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max-app-width);
+  height: var(--bottom-nav-height);
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 6px;
+  z-index: 90;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.nav-item-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 28px;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.nav-item span {
+  font-size: calc(11px * var(--font-scale));
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.nav-item.active {
+  color: var(--text-white);
+}
+
+.nav-item.active .nav-item-icon-wrapper {
+  background-color: var(--primary-rubi);
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px var(--primary-rubi-glow);
+}
+
+.nav-item.active svg {
+  transform: scale(1.08);
+}
+
+.nav-item:active {
+  transform: scale(0.95);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-gold);
+}
