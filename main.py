@@ -1,7 +1,8 @@
 """
 Super-App Oficial da Igreja Batista Pentecostal Mundial da Carvalho Ramos (IBPM CR).
 Tecnologia: Python Flet, SQLite Local (Offline-First), Supabase Sync, Cloudflare R2.
-Acessibilidade: WCAG AAA, Redimensionamento Sênior Global (80% a 150%), Áudio em Segundo Plano.
+Acessibilidade: WCAG AAA, Redimensionamento Sênior Global (80% a 150%).
+Versão 1.0 Enxuta: 4 Abas Fluidas e Respiradas (Início, Oração, Retiro 2026, Igreja).
 """
 import sys
 from pathlib import Path
@@ -23,12 +24,11 @@ from core.theme import (
     AppBorder,
     AppAlignment,
 )
-from core.audio_service import AudioService
 from services.db_service import DBService
 from views.home_view import HomeView
 from views.oracao_view import OracaoView
-from views.palavra_view import PalavraView
-from views.fotos_view import FotosView
+from views.retiro_view import RetiroView
+from views.igreja_view import IgrejaView
 
 
 def main(page: ft.Page):
@@ -53,11 +53,7 @@ def main(page: ft.Page):
     except Exception as err:
         print(f"[DB INIT ERROR]: {err}")
 
-    # 3. Inicialização do Serviço de Áudio com a Página
-    audio_service = AudioService()
-    audio_service.set_page(page)
-
-    # 4. Controle de Acessibilidade Sênior (AppBar)
+    # 3. Controle de Acessibilidade Sênior (AppBar)
     scale_text = ft.Text(
         f"{int(FontScaleManager.get_scale() * 100)}%",
         color=AppColors.GOLD_LIGHT,
@@ -67,7 +63,10 @@ def main(page: ft.Page):
 
     def update_scale_ui():
         scale_text.value = f"{int(FontScaleManager.get_scale() * 100)}%"
-        page.update()
+        try:
+            page.update()
+        except Exception:
+            pass
 
     FontScaleManager.register_listener(update_scale_ui)
 
@@ -77,7 +76,7 @@ def main(page: ft.Page):
     def on_zoom_out(e):
         FontScaleManager.decrease()
 
-    # 5. Top AppBar com Marca Oficial e Redimensionador Sênior
+    # 4. Top AppBar com Marca Oficial e Redimensionador Sênior
     app_bar = ft.AppBar(
         leading=ft.Container(
             content=ft.Icon(Icons.LOCAL_FIRE_DEPARTMENT_ROUNDED, color=AppColors.PRIMARY_RUBI, size=26),
@@ -133,106 +132,39 @@ def main(page: ft.Page):
     )
     page.appbar = app_bar
 
-    # 6. Criação das 4 Telas Principais com Navegação Conectada
+    # 5. Criação das 4 Telas Principais da v1.0
     def switch_tab(index: int):
         if 0 <= index < len(views):
             nav_bar.selected_index = index
             content_area.content = views[index]
-            page.update()
+            try:
+                page.update()
+            except Exception:
+                pass
 
     home_view = HomeView(page, navigate_to_tab=switch_tab)
     oracao_view = OracaoView(page)
-    palavra_view = PalavraView(page)
-    fotos_view = FotosView(page)
+    retiro_view = RetiroView(page)
+    igreja_view = IgrejaView(page)
 
-    views = [home_view, oracao_view, palavra_view, fotos_view]
+    views = [home_view, oracao_view, retiro_view, igreja_view]
 
-    # Container Dinâmico Central (Permite rolagem suave por tela)
+    # Container Dinâmico Central (Permite rolagem suave por tela com respiro)
     content_area = ft.Container(
         content=views[0],
         expand=True,
         bgcolor=AppColors.BG_DARK,
     )
 
-    # 7. Mini-Player Flutuante de Áudio (Persistente em Segundo Plano)
-    player_title = ft.Text(
-        "Nenhum áudio em reprodução",
-        size=13,
-        weight=ft.FontWeight.BOLD,
-        color=AppColors.TEXT_WHITE,
-        max_lines=1,
-        overflow=ft.TextOverflow.ELLIPSIS,
-    )
-    player_subtitle = ft.Text(
-        "Toque em uma ministração pastoral para ouvir",
-        size=11,
-        color=AppColors.TEXT_MUTED,
-        max_lines=1,
-        overflow=ft.TextOverflow.ELLIPSIS,
-    )
-    play_pause_btn = ft.IconButton(
-        icon=Icons.PLAY_ARROW_ROUNDED,
-        icon_color=AppColors.PRIMARY_RUBI,
-        icon_size=28,
-        tooltip="Tocar / Pausar",
-        on_click=lambda e: audio_service.toggle_play_pause(),
-    )
-
-    def on_audio_state_change():
-        if audio_service.current_track:
-            player_title.value = audio_service.current_track.title
-            player_subtitle.value = audio_service.current_track.subtitle
-            play_pause_btn.icon = (
-                Icons.PAUSE_ROUNDED if audio_service.is_playing else Icons.PLAY_ARROW_ROUNDED
-            )
-            mini_player.visible = True
-        else:
-            mini_player.visible = False
-        page.update()
-
-    audio_service.register_listener(on_audio_state_change)
-
-    mini_player = ft.Container(
-        visible=False,
-        bgcolor=AppColors.BG_SURFACE_ALT,
-        border=AppBorder.all(1, AppColors.BORDER_RUBI),
-        border_radius=12,
-        margin=AppMargin.only(left=12, right=12, bottom=6),
-        padding=AppPadding.symmetric(horizontal=12, vertical=6),
-        content=ft.Row(
-            controls=[
-                ft.Container(
-                    content=ft.Icon(Icons.HEADPHONES_ROUNDED, color=AppColors.SECONDARY_GOLD, size=22),
-                    padding=AppPadding.all(6),
-                    bgcolor=AppColors.BG_SURFACE,
-                    border_radius=8,
-                ),
-                ft.Column(
-                    controls=[player_title, player_subtitle],
-                    spacing=2,
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    expand=True,
-                ),
-                play_pause_btn,
-                ft.IconButton(
-                    icon=Icons.CLOSE_ROUNDED,
-                    icon_color=AppColors.TEXT_MUTED,
-                    icon_size=18,
-                    tooltip="Fechar Player",
-                    on_click=lambda e: audio_service.stop(),
-                ),
-            ],
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-            vertical_alignment=ft.CrossAxisAlignment.CENTER,
-        ),
-    )
-
-    # 8. Navegação por Abas (Material 3 Bottom Navigation)
+    # 6. Navegação por Abas (Material 3 Bottom Navigation Enxuta)
     def on_nav_change(e):
         selected_index = e.control.selected_index
         if 0 <= selected_index < len(views):
             content_area.content = views[selected_index]
-            page.update()
+            try:
+                page.update()
+            except Exception:
+                pass
 
     nav_destinations = [
         NavigationDestination(
@@ -246,14 +178,14 @@ def main(page: ft.Page):
             label="Oração",
         ),
         NavigationDestination(
-            icon=Icons.AUTO_STORIES_OUTLINED,
-            selected_icon=Icons.AUTO_STORIES_ROUNDED,
-            label="Palavra",
+            icon=Icons.LOCAL_FIRE_DEPARTMENT_OUTLINED,
+            selected_icon=Icons.LOCAL_FIRE_DEPARTMENT_ROUNDED,
+            label="Retiro 2026",
         ),
         NavigationDestination(
-            icon=Icons.PHOTO_LIBRARY_OUTLINED,
-            selected_icon=Icons.PHOTO_LIBRARY_ROUNDED,
-            label="Mídia",
+            icon=Icons.CHURCH_OUTLINED,
+            selected_icon=Icons.CHURCH_ROUNDED,
+            label="Igreja",
         ),
     ]
 
@@ -267,18 +199,12 @@ def main(page: ft.Page):
     )
     page.navigation_bar = nav_bar
 
-    # 9. Montagem da Página Principal
-    page.add(
-        ft.Column(
-            controls=[
-                content_area,
-                mini_player,
-            ],
-            expand=True,
-            spacing=0,
-        )
-    )
-    page.update()
+    # 7. Montagem Direta e Limpa da Página Principal
+    page.add(content_area)
+    try:
+        page.update()
+    except Exception:
+        pass
 
 
 if __name__ == "__main__":

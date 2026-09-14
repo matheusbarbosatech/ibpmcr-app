@@ -6,7 +6,7 @@ e realizar inscrições 100% no app com pagamento via PIX e envio para o WhatsAp
 import flet as ft
 from typing import Optional, Callable
 from core.theme import (
-    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment
+    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment, AppDialog
 )
 from services.db_service import DatabaseService
 from services.share_engine import ShareEngine
@@ -132,11 +132,7 @@ class InscricaoEventoModal:
         )
         
         def fechar(e=None):
-            try:
-                page.close(dlg)
-            except Exception:
-                dlg.open = False
-                page.update()
+            AppDialog.close(page, dlg)
                 
         def submeter_inscricao(e):
             nome = txt_nome.value.strip() if txt_nome.value else ""
@@ -255,17 +251,12 @@ class InscricaoEventoModal:
             bgcolor=AppColors.BG_SURFACE,
         )
         
-        page.open(dlg)
-        page.update()
+        AppDialog.open(page, dlg)
 
     @staticmethod
     def abrir_modal_pagamento_pix(page: ft.Page, evento: EventoIgreja, inscricao: InscricaoEvento):
         def fechar(e=None):
-            try:
-                page.close(dlg_pix)
-            except Exception:
-                dlg_pix.open = False
-                page.update()
+            AppDialog.close(page, dlg_pix)
 
         def copiar_pix(e):
             ShareEngine.copy_to_clipboard(page, CHAVE_PIX_OFICIAL, "Chave PIX copiada!")
@@ -369,8 +360,7 @@ class InscricaoEventoModal:
             bgcolor=AppColors.BG_SURFACE,
         )
         
-        page.open(dlg_pix)
-        page.update()
+        AppDialog.open(page, dlg_pix)
 
 
 class CompraProdutoModal:
@@ -433,11 +423,7 @@ class CompraProdutoModal:
         txt_qtd.on_change = atualizar_total
         
         def fechar(e=None):
-            try:
-                page.close(dlg)
-            except Exception:
-                dlg.open = False
-                page.update()
+            AppDialog.close(page, dlg)
                 
         def copiar_pix(e):
             ShareEngine.copy_to_clipboard(page, CHAVE_PIX_OFICIAL, "Chave PIX copiada!")
@@ -539,8 +525,7 @@ class CompraProdutoModal:
             ),
             bgcolor=AppColors.BG_SURFACE,
         )
-        page.open(dlg)
-        page.update()
+        AppDialog.open(page, dlg)
 
 
 class LojinhaModal:
@@ -551,7 +536,7 @@ class LojinhaModal:
         categoria_ativa = ["Todos"]
         produtos_container = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO)
 
-        def render_produtos():
+        def render_produtos(should_update=False):
             cat = categoria_ativa[0]
             produtos = db.get_produtos_loja(cat)
             cards = []
@@ -608,12 +593,16 @@ class LojinhaModal:
                 )
                 cards.append(card)
             produtos_container.controls = cards
-            page.update()
+            if should_update:
+                try:
+                    page.update()
+                except Exception:
+                    pass
 
         def set_categoria(cat):
             categoria_ativa[0] = cat
             btn_row.controls = [criar_chip(c) for c in ["Todos", "Vestuário", "Cantina", "Livros", "Lembranças"]]
-            render_produtos()
+            render_produtos(should_update=True)
 
         def criar_chip(c):
             ativo = (c == categoria_ativa[0])
@@ -634,11 +623,7 @@ class LojinhaModal:
         )
 
         def fechar(e=None):
-            try:
-                page.close(dlg)
-            except Exception:
-                dlg.open = False
-                page.update()
+            AppDialog.close(page, dlg)
 
         dlg = ft.AlertDialog(
             modal=True,
@@ -668,5 +653,4 @@ class LojinhaModal:
         )
 
         render_produtos()
-        page.open(dlg)
-        page.update()
+        AppDialog.open(page, dlg)

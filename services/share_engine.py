@@ -53,14 +53,13 @@ class ShareEngine:
     @staticmethod
     def show_feedback(page: ft.Page, message: str):
         """Exibe feedback visual amigável e de alto contraste."""
-        snack = ft.SnackBar(
-            content=ft.Text(message, color=AppColors.TEXT_WHITE, weight=ft.FontWeight.BOLD),
-            bgcolor=AppColors.BG_SURFACE_ALT,
-            duration=3000,
-        )
         try:
-            page.open(snack)
+            snack = ft.SnackBar(
+                content=ft.Text(message, color=AppColors.TEXT_WHITE, weight=ft.FontWeight.BOLD),
+                bgcolor=AppColors.BG_SURFACE_ALT,
+                duration=3000,
+            )
+            from core.theme import AppDialog
+            AppDialog.open(page, snack)
         except Exception:
-            page.snack_bar = snack
-            snack.open = True
-            page.update()
+            pass

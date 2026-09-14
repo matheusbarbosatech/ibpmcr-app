@@ -4,7 +4,7 @@ Membros interagem clicando em 'Estou Orando por Você' e enviam novos pedidos pa
 """
 import flet as ft
 from core.theme import (
-    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment
+    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment, AppDialog
 )
 from services.db_service import DatabaseService
 from services.supabase_client import SupabaseService
@@ -142,7 +142,7 @@ class OracaoView(ft.Container):
             spacing=8,
         )
 
-    def recarregar_pedidos(self):
+    def recarregar_pedidos(self, e=None):
         self.render_pedidos()
         try:
             self.app_page.update()
@@ -217,8 +217,8 @@ class OracaoView(ft.Container):
                     spacing=4,
                 ),
                 bgcolor=AppColors.BG_SURFACE,
-                padding=AppPadding.all(14),
-                border_radius=14,
+                padding=AppPadding.all(18),
+                border_radius=18,
                 border=AppBorder.all(1, AppColors.BORDER_DEFAULT),
             )
             self.pedidos_column.controls.append(card)
@@ -234,11 +234,7 @@ class OracaoView(ft.Container):
 
     def abrir_modal_novo_pedido(self, e):
         def fechar_modal(ev=None):
-            try:
-                self.app_page.close(dialogo)
-            except Exception:
-                dialogo.open = False
-                self.app_page.update()
+            AppDialog.close(self.app_page, dialogo)
 
         def salvar_pedido(ev):
             nome = self.input_nome.value.strip() or "Irmão(ã) da Fé"
@@ -298,9 +294,4 @@ class OracaoView(ft.Container):
             bgcolor=AppColors.BG_SURFACE,
         )
 
-        try:
-            self.app_page.open(dialogo)
-        except Exception:
-            self.app_page.dialog = dialogo
-            dialogo.open = True
-            self.app_page.update()
+        AppDialog.open(self.app_page, dialogo)

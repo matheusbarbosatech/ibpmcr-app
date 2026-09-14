@@ -140,3 +140,98 @@ class AppBorder:
             return ft.Border(top=side, right=side, bottom=side, left=side)
         except Exception:
             return None
+
+class AppDialog:
+    """Compatibilidade universal de Modais e Diálogos entre versões do Flet (0.2x a 0.8x+)."""
+    @staticmethod
+    def open(page: ft.Page, control):
+        if hasattr(page, "show_dialog"):
+            try:
+                page.show_dialog(control)
+                return
+            except Exception:
+                pass
+        if hasattr(page, "open"):
+            try:
+                page.open(control)
+                return
+            except Exception:
+                pass
+        try:
+            if hasattr(page, "overlay"):
+                page.overlay.append(control)
+                if hasattr(control, "open"):
+                    control.open = True
+                page.update()
+        except Exception:
+            pass
+
+    @staticmethod
+    def close(page: ft.Page, control=None):
+        if hasattr(page, "pop_dialog"):
+            try:
+                page.pop_dialog()
+                return
+            except Exception:
+                pass
+        if hasattr(page, "close"):
+            try:
+                page.close(control)
+                return
+            except Exception:
+                pass
+        try:
+            if control and hasattr(page, "overlay") and control in page.overlay:
+                page.overlay.remove(control)
+                page.update()
+        except Exception:
+            pass
+
+# Garante que page.open e page.close funcionem em qualquer versão do Flet
+if not hasattr(ft.Page, "open"):
+    ft.Page.open = lambda self, control: AppDialog.open(self, control)
+if not hasattr(ft.Page, "close"):
+    ft.Page.close = lambda self, control=None: AppDialog.close(self, control)
+
+class AppUrl:
+    """Abridor universal de links web/whatsapp/maps para ambientes síncronos e assíncronos."""
+    @staticmethod
+    def launch(page: ft.Page, url: str):
+        if not page or not url:
+            return
+        try:
+            page.launch_url(url)
+        except Exception:
+            pass
+
+# Patch universal no ft.Page.launch_url para evitar o warning de coroutine unawaited
+_orig_launch_url = getattr(ft.Page, "launch_url", None)
+if _orig_launch_url:
+    async def _async_launch_task(page_obj, url_val, *args, **kwargs):
+        try:
+            await _orig_launch_url(page_obj, url_val, *args, **kwargs)
+        except Exception:
+            pass
+
+    def _safe_launch_url(self, url, *args, **kwargs):
+        if hasattr(self, "run_task") and getattr(self, "session", None) and getattr(self.session, "connection", None):
+            try:
+                return self.run_task(_async_launch_task, self, url, *args, **kwargs)
+            except Exception:
+                pass
+        import asyncio
+        try:
+            loop = asyncio.get_running_loop()
+            coro = _orig_launch_url(self, url, *args, **kwargs)
+            return loop.create_task(coro)
+        except (RuntimeError, Exception):
+            pass
+        try:
+            coro = _orig_launch_url(self, url, *args, **kwargs)
+            if hasattr(coro, "close"):
+                coro.close()
+        except Exception:
+            pass
+    ft.Page.launch_url = _safe_launch_url
+
+

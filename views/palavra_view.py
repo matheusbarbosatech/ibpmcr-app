@@ -8,7 +8,7 @@ Contém:
 """
 import flet as ft
 from core.theme import (
-    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment
+    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment, AppDialog
 )
 from core.audio_service import AudioService, AudioTrack
 from services.db_service import DatabaseService
@@ -565,11 +565,7 @@ class PalavraView(ft.Container):
             return
 
         def fechar(e=None):
-            try:
-                self.app_page.close(dlg)
-            except Exception:
-                dlg.open = False
-                self.app_page.update()
+            AppDialog.close(self.app_page, dlg)
 
         q = questoes[0]
         pergunta = q.get("pergunta", "")
@@ -613,12 +609,7 @@ class PalavraView(ft.Container):
             bgcolor=AppColors.BG_SURFACE,
         )
 
-        try:
-            self.app_page.open(dlg)
-        except Exception:
-            self.app_page.dialog = dlg
-            dlg.open = True
-            self.app_page.update()
+        AppDialog.open(self.app_page, dlg)
 
     # 5. SUB-ABA COLETÂNEA DE LOUVORES & HINÁRIO DO ALTAR (ESTILO MARANATA)
     def _render_hinario_view(self):
@@ -786,12 +777,8 @@ class PalavraView(ft.Container):
             pass
 
     def _abrir_modal_louvor(self, louvor: dict):
-        def fechar(e):
-            try:
-                self.app_page.close(dlg)
-            except Exception:
-                dlg.open = False
-                self.app_page.update()
+        def fechar(e=None):
+            AppDialog.close(self.app_page, dlg)
 
         dlg = ft.AlertDialog(
             modal=False,
@@ -828,10 +815,5 @@ class PalavraView(ft.Container):
             bgcolor=AppColors.BG_SURFACE,
         )
 
-        try:
-            self.app_page.open(dlg)
-        except Exception:
-            self.app_page.dialog = dlg
-            dlg.open = True
-            self.app_page.update()
+        AppDialog.open(self.app_page, dlg)
 

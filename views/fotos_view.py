@@ -5,7 +5,7 @@ Todos os itens com botões de 1 clique para WhatsApp Status, Stories e Download 
 """
 import flet as ft
 from core.theme import (
-    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment
+    AppColors, FontScaleManager, Icons, AppPadding, AppMargin, AppBorder, AppAlignment, AppDialog
 )
 from services.db_service import DatabaseService
 from services.share_engine import ShareEngine
@@ -212,13 +212,14 @@ class FotosView(ft.Container):
             spacing=8,
         )
 
-    def abrir_foto_modal(self, foto):
+    def abrir_foto_modal(self, foto=None):
+        if foto is None:
+            fotos = self.db.get_galeria_fotos()
+            foto = fotos[0] if fotos else None
+        if not foto:
+            return
         def fechar(e=None):
-            try:
-                self.app_page.close(dlg)
-            except Exception:
-                dlg.open = False
-                self.app_page.update()
+            AppDialog.close(self.app_page, dlg)
 
         dlg = ft.AlertDialog(
             modal=True,
@@ -244,12 +245,7 @@ class FotosView(ft.Container):
             bgcolor=AppColors.BG_SURFACE,
         )
 
-        try:
-            self.app_page.open(dlg)
-        except Exception:
-            self.app_page.dialog = dlg
-            dlg.open = True
-            self.app_page.update()
+        AppDialog.open(self.app_page, dlg)
 
     # 2. CORTES VERTICAIS (SHORTS 9:16)
     def _render_cortes_verticais(self):
